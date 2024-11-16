@@ -1,0 +1,116 @@
+<section class="banner banner_3" style="background: url(assets/images/incense_sticks.jpg);">
+  <div class="banner_3_overlay">
+    <div class="container container_large">
+      <div class="row justify-content-between align-items-center">
+        <div class="col-xl-7 col-lg-8 wow fadeInUp">
+          <div class="banner_text mt-5">
+            <h5>心意香油</h5>
+            <h1>感謝您的心意，護持香火綿延</h1>
+            <p>捐助香油錢，不僅是支持宮廟，也是與神明結緣的一種方式。<br />每一分香油錢，都化作信徒的祈願，祝您闔家平安，順心如意。</p>
+            <!-- <a class="common_btn" href="menu_03.html">我要捐香油錢 <i class="far fa-chevron-right"></i></a> -->
+            <a class="common_btn mt-3" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">捐香油錢 <i
+                class="far fa-chevron-right"> </i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 捐款彈出視窗 -->
+<div class="payment_modal">
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="pay_modal_info">
+            <h4 class="text-center">填寫捐款金額</h4>
+            <!-- 使用表單 -->
+            <form [formGroup]="donationForm" (ngSubmit)="onSubmit()">
+              <div class="mb-3 row align-items-center">
+                <!-- <label class="col-md-3 col-form-label">金額: </label> -->
+                <div class="col-md-12">
+                  <input type="number" formControlName="fAmount" placeholder="請輸入金額" class="form-control" />
+                  <!-- 錯誤訊息 -->
+                  <div *ngIf="donationForm.get('fAmount')?.invalid && donationForm.get('fAmount')?.touched">
+                    <small *ngIf="donationForm.get('fAmount')?.errors?.['required']"
+                      style="color: red; display: block;">*捐款金額是必填的</small>
+                    <small *ngIf="donationForm.get('fAmount')?.errors?.['min']"
+                      style="color: red; display: block;">*捐款金額必須大於 0</small>
+                    <small *ngIf="donationForm.get('fAmount')?.errors?.['notPositiveInteger']"
+                      style="color: red; display: block;">*捐款金額必須是正整數</small>
+                  </div>
+                </div>
+              </div>
+              <div class="payment_btn_area">
+                <button type="button" class="btn btn-danger common_btn" data-bs-dismiss="modal">取消</button>
+                <button type="submit" class="btn btn-success common_btn" [disabled]="donationForm.invalid" data-bs-dismiss="modal">確認</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 彈出信用卡付款(可至payment頁尋找) -->
+<!-- <div class="payment_modal">
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="pay_modal_info">
+            <h4 class="text-center">填寫信用卡資料</h4>
+            <p class="text-center mt-3">請詳閱下列服務條款</p>
+            <ul>
+              <li>使用信用卡/金融卡付款，付款成功或失敗請依捐款紀錄狀態為主。</li>
+              <li>如有付款失敗或重複刷卡的情形，您可能仍會收到銀行消費通知，後續會自動協助取消此次授權或進行退刷，於交易日隔天後起算約 7~14 個工作天，就會自動退刷到您的信用卡額度中。</li>
+            </ul>
+            <form>
+              <div class="mb-3 row align-items-center">
+                <label class="col-md-3 col-form-label">捐款金額</label>
+                <div class="col-md-9">
+                    <input type="text" placeholder="請輸入金額" class="form-control">
+                </div>
+              </div>
+              <div class="mb-3 row align-items-center">
+                <label class="col-md-3 col-form-label">持卡人</label>
+                <div class="col-md-9">
+                  <input type="text" placeholder="持卡人姓名" class="form-control">
+                </div>
+              </div>
+
+              <div class="mb-3 row align-items-center">
+                <label class="col-md-3 col-form-label">信用卡號</label>
+                <div class="col-md-9">
+                  <input type="text" placeholder="請填寫信用卡號" class="form-control">
+                </div>
+              </div>
+
+              <div class="mb-3 row align-items-center">
+                <label class="col-md-3 col-form-label">有效期限</label>
+                <div class="col-md-9">
+                  <input type="text" placeholder="MM/YY" class="form-control">
+                </div>
+              </div>
+
+              <div class="mb-3 row align-items-center">
+                <label class="col-md-3 col-form-label">背面末3碼</label>
+                <div class="col-md-9">
+                  <input type="text" placeholder="000" class="form-control">
+                </div>
+              </div>
+              <div class="mb-3 col-12 mx-0 px-0 mt-1 mx-1" style="color: red;">※ 部分海外信用卡驗證較嚴格，若付款失敗，請嘗試其他發卡行之信用卡。</div>
+
+              <div class="payment_btn_area">
+                <button type="button" class="btn btn-danger common_btn" data-bs-dismiss="modal">取消</button>
+                <button type="submit" class="btn btn-success common_btn">確認</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

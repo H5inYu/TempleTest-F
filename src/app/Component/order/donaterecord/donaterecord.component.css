@@ -1,0 +1,5 @@
+.current-page .page-link {
+  background-color: var(--colorPrimary) !important; /* 調背景 */
+  color: var(--colorWhite) !important; /* 白色文字 */
+  border-color: var(--colorPrimary) !important;
+}

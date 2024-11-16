@@ -1,0 +1,74 @@
+input[type="radio"] {
+  all: unset; /* 重置所有樣式 */
+  width: 14px !important; /* 按鈕大小 */
+  height: 14px !important; /* 按鈕大小 */
+  border: 2px solid #ccc; /* 邊框顏色 */
+  border-radius: 50%; /* 圓形 */
+  outline: none; /* 去掉外框 */
+  cursor: pointer; /* 滑鼠指標 */
+  position: relative; /* 位置設定 */
+  -webkit-appearance: none; /* Safari */
+  -moz-appearance: none; /* Firefox */
+}
+
+input[type="radio"]:checked {
+  border: 2px solid var(--colorPrimary); /* 選中時的邊框顏色 */
+  background-color: var(--colorPrimary); /* 選中時的內部顏色 */
+}
+
+input[type="radio"]:checked::after {
+  content: ""; /* 生成內容 */
+  width: 7px !important; /* 內部圓點大小 */
+  height: 7px !important; /* 內部圓點大小 */
+  background: white; /* 內部圓點顏色 */
+  border-radius: 50%; /* 內部圓點圓形 */
+  position: absolute; /* 絕對定位 */
+  top: 50%; /* 垂直居中 */
+  left: 50%; /* 水平居中 */
+  transform: translate(-50%, -50%); /* 居中對齊 */
+}
+
+
+
+/* table樣式 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  display: table-cell;
+  padding: 10px 15px; /* 水平和垂直內間距 */
+  text-align: left;
+}
+
+td {
+  border-bottom: 1px solid #ddd; /* 增加下方邊框來區分每一行 */
+}
+
+td:nth-child(2), /* 數量列 */
+td:nth-child(3), /* 售價列 */
+td:nth-child(4) { /* 小計列 */
+  padding: 10px 15px;
+  margin-right: 10px;
+  text-align: right;
+}
+
+
+
+/* 確保checkbox和文字在同一行顯示 */
+.checkbox-container {
+  display: inline-flex !important;  /* 保持在同一行 */
+  align-items: center;  /* 垂直居中checkbox和文字 */
+  white-space: nowrap;      /* 防止文字換行 */
+}
+
+/* 調整checkbox與文字之間的間距 */
+.checkbox-container input[type="checkbox"] {
+  margin-right: 12px;  /* 控制checkbox與文字間的距離 */
+}
+
+/* 在文字下方添加距離 */
+.checkbox-container label {
+  padding-bottom: 20px !important;
+}

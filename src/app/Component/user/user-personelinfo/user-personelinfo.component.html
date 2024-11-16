@@ -1,0 +1,92 @@
+<!--============================
+      DASHBOARD INFO EDIT START
+  =============================-->
+<section class="dashboard pt_120 xs_pt_80">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-3 col-lg-4 wow fadeInLeft">
+        <div class="dashboard_sidebar">
+          <div class="dashboard_sidebar_user">
+            <div class="img">
+              <img [src]="user.fUserImage ? 'https://localhost:7203' + user.fUserImage : 'assets/images/bighead.png'" alt="dashboard"
+                class="img-fluid w-100">
+              <label for="profile_photo"><i class="far fa-camera"></i></label>
+              <input type="file" id="profile_photo" (change)="onPhotoSelected($event)" accept="image/*" hidden>
+            </div>
+            <p>信箱: {{ user.fUserEmail }}</p>
+            <p>狀態: {{ user.fUserState }}</p>
+          </div>
+          <div class="dashboard_sidebar_menu">
+            <ul>
+              <li><a class="active" routerLink="/user/personelinfo"><i class="fas fa-user"></i> 會員資料</a></li>
+              <li><a routerLink="/act/userarea"><i class="fas fa-clipboard-list"></i> 活動紀錄</a>
+              </li>
+              <li><a routerLink="/orderlist"><i class="fas fa-shopping-basket"></i> 訂單列表</a></li>
+              <li><a routerLink="/donaterecord"><i class="fas fa-star"></i> 捐款紀錄</a></li>
+              <li><a href="dashboard_wishlist.html"><i class="fas fa-heart"></i> 願望清單</a></li>
+                          </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-9 col-lg-8 wow fadeInRight">
+        <div class="dashboard_content">
+          <div class="dashboard_profile_info">
+            <div class="dashboard_profile_info_edit">
+              <h2>會員資料</h2>
+              <form class="info_edit_form">
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="">姓名:</label>
+                    <input type="text" placeholder="姓名" [(ngModel)]="user.fUserName" name="fUserName">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="">暱稱:</label>
+                    <input type="text" placeholder="暱稱" [(ngModel)]="user.fUserNickName" name="FUserNickName">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="">電話:</label>
+                    <input type="text" placeholder="電話" [(ngModel)]="user.fUserPhone" name="FUserPhone">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="">性別:</label>
+                    <div class="gender-group">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="fUserGender" id="genderMale" [value]="true" [(ngModel)]="user.fUserGender">
+                        <label class="form-check-label" for="genderMale">男</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="fUserGender" id="genderFemale" [value]="false" [(ngModel)]="user.fUserGender">
+                        <label class="form-check-label" for="genderFemale">女</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="fUserGender" id="genderNull" [value]="null" [(ngModel)]="user.fUserGender">
+                        <label class="form-check-label" for="genderNull">不透露</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="">生日:</label>
+                    <input type="date" [(ngModel)]="user.fUserBirthdate" name="FUserBirthdate">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="">地址:</label>
+                    <input type="text" placeholder="地址" [(ngModel)]="user.fUserAddress" name="FUserAddress">
+                  </div>
+                  <div class="col-md-12">
+                    <button type="button" class="common_btn" (click)="onSave()">儲存修改</button>
+                    <button type="button" class="common_btn" (click)="onCancel()">取消</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!--============================
+      DASHBOARD INFO EDIT END
+  =============================-->

@@ -1,0 +1,13 @@
+<div class="container pt_90">
+  <div class="icon">
+      <img src="assets/images/orderImg/complete1.png" alt="完成圖標" />
+  </div>
+  <h1 class="title">付款確認中</h1>
+  <p class="description">感謝您的付款，正在為您準備訂單完成頁面......</p>
+  <!-- <a class="common_btn mt-3" routerLink="/ordercomplete" data-bs-toggle="modal"data-bs-target="#exampleModal">
+     確認付款 <i class="far fa-chevron-right"> </i>
+    </a> -->
+    <a class="common_btn mt-3" (click)="confirmPayment()" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      確認付款 <i class="far fa-chevron-right"></i>
+  </a>
+</div>

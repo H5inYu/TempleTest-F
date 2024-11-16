@@ -1,0 +1,281 @@
+
+<!--==========================
+        BREADCRUMB AREA START
+    ===========================-->
+    <section class="breadcrumb_area" style="background: url(assets/images/light/light01.jpg);">
+      <div class="container">
+          <div class="row wow fadeInUp">
+              <div class="col-12">
+                  <div class="breadcrumb_text">
+                      <h1>點燈</h1>
+                      <ul>
+                          <li><a href="#">Home </a></li>
+                          <li><a href="#">Reservations</a></li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <section class="reservation_page pt_120 xs_pt_100">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-6 wow fadeInLeft">
+                  <div class="reservation_img">
+                      <img src="assets/images/light/light.jpg" alt="reservation" class="img-fluid w-100">
+                  </div>
+              </div>
+              <div class="col-lg-6 wow fadeInRight">
+                  <div class="reservation_form">
+                      <h2>線上預約點燈聯絡人資料</h2>
+                      <form action="#">
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <div class="reservation_form_input">
+                                      <input type="text" placeholder="姓名" [value]="user.fUserName" readonly>
+                                  </div>
+                              </div>
+                              <div class="col-md-6">
+                                  <div class="reservation_form_input">
+                                      <input type="text" placeholder="暱稱" [value]="user.fUserNickName" readonly>
+                                  </div>
+                              </div>
+                              <div class="col-md-6">
+                                  <div class="reservation_form_input">
+                                      <input type="text" placeholder="電話" [value]="user.fUserPhone" readonly>
+                                  </div>
+                              </div>
+                              <div class="col-md-6">
+                                  <div class="reservation_form_input">
+                                      <input type="date" [value]="user.fUserBirthdate" readonly>
+                                  </div>
+                              </div>
+                              <div class="col-md-6">
+                                  <div class="reservation_form_input">
+                                      <input type="text" placeholder="地址" [value]="user.fUserAddress" readonly>
+                                  </div>
+                              </div>
+                              <div class="col-md-6">
+                                  <div class="reservation_form_input">
+                                      <input type="email" placeholder="電子郵件" [value]="user.fUserEmail" readonly>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-12 mt-3">
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+
+          <!-- 被祈福者區塊 - 使用新的 row 但保持在同一個 container 內 -->
+          <div class="row mt-4">
+              <div class="col-12">
+                  <div class="blessed-persons-section">
+                      <!-- 標題和上傳區域 -->
+                      <div class="d-flex align-items-center justify-content-between mb-3">
+                          <h3 class="section-title mb-0">被祈福者資料</h3>
+                          <div class="d-flex align-items-center">
+                              <input type="file"
+                                     class="form-control me-2"
+                                     accept=".csv"
+                                     (change)="onFileSelected($event)"
+                                     style="width: auto;"
+                                     #fileInput>
+                              <button class="btn btn-outline-secondary btn-sm me-2"
+                                      (click)="uploadCSV()">
+                                  上傳CSV
+                              </button>
+                              <button class="btn btn-outline-secondary btn-sm"
+                                      (click)="downloadSampleCSV()">
+                                  下載範例
+                              </button>
+                          </div>
+                      </div>
+
+                      <!-- 被祈福者列表顯示區域 -->
+                      <div class="blessed-persons-list mt-4">
+                          <div class="table-responsive">
+                              <table class="table table-bordered">
+                                  <thead>
+                                      <tr>
+                                          <th>姓名</th>
+                                          <th>生日</th>
+                                          <th>地址</th>
+                                          <th>開始日期</th>
+                                          <th>方案</th>
+                                          <th>操作</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr *ngFor="let person of blessedPersons; let i = index">
+                                          <td>{{person.name}}</td>
+                                          <td>{{person.birthDate}}</td>
+                                          <td>{{person.address}}</td>
+                                          <td>{{person.startDate}}</td>
+                                          <td>{{person.plan}}天</td>
+                                          <td>
+                                              <button class="btn btn-danger btn-sm" (click)="removeBlessedPerson(i)">
+                                                  刪除
+                                              </button>
+                                          </td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+
+                          <!-- 如果沒有資料時顯示 -->
+                          <div *ngIf="blessedPersons.length === 0" class="text-center p-3">
+                              尚未加被祈福者資料
+                          </div>
+                      </div>
+
+                      <!-- 新增被祈福者按鈕區域 -->
+                      <div class="text-center mb-3">
+                          <button class="common_btn" (click)="addBlessedPerson()">
+                              新增被祈福者
+                          </button>
+                      </div>
+
+                      <!-- 被祈福者表單 -->
+                      <div class="blessed-person-form" *ngIf="showBlessedPersonForm">
+                          <div class="card mt-3">
+                              <div class="card-body">
+                                  <h4>填寫被祈福者資料</h4>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <div class="reservation_form_input">
+                                              <label class="form-label mb-2">姓名：<span class="text-danger">*</span></label>
+                                              <input type="text" placeholder="姓名" [(ngModel)]="currentBlessedPerson.name" required>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="reservation_form_input">
+                                              <label class="form-label mb-2">生日：<span class="text-danger">*</span></label>
+                                              <input type="date" placeholder="生日" [(ngModel)]="currentBlessedPerson.birthDate" required>
+                                          </div>
+                                      </div>
+                                      <div class="col-12">
+                                          <div class="reservation_form_input">
+                                              <label class="form-label mb-2">地址：<span class="text-danger">*</span></label>
+                                              <input type="text" placeholder="地址" [(ngModel)]="currentBlessedPerson.address" required>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                          <div class="reservation_form_input">
+                                              <label class="form-label mb-2">開始日期：<span class="text-danger">*</span></label>
+                                              <input type="date" [(ngModel)]="currentBlessedPerson.startDate" required>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                          <div class="reservation_form_input">
+                                              <label class="form-label mb-2 d-block">方案選擇：<span class="text-danger">*</span></label>
+                                              <select class="form-control" [(ngModel)]="currentBlessedPerson.plan" (change)="updateFee()" required>
+                                                  <option value="">請選擇方案</option>
+                                                  <option value="30">30天</option>
+                                                  <option value="90">90天</option>
+                                                  <option value="365">365天</option>
+                                              </select>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                          <div class="reservation_form_input">
+                                              <label class="form-label mb-2">費用：</label>
+                                              <input type="text" [value]="currentBlessedPerson.fee + '$'" readonly>
+                                          </div>
+                                      </div>
+                                      <div class="col-12">
+                                          <div class="button-container">
+                                              <button class="common_btn me-2" (click)="saveBlessedPerson()">確認</button>
+                                              <button class="common_btn" (click)="cancelBlessedPerson()">取消</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <!-- 總計與付款區塊 -->
+          <div class="row mt-4">
+              <div class="col-12">
+                  <div class="dashboard_content">
+                      <div class="dashboard_profile_info">
+                          <div class="dashboard_profile_info_edit">
+                              <h2>總計與付款資訊</h2>
+
+                              <!-- 總金額顯示 -->
+                              <div class="total-amount mb-4">
+                                  <div class="d-flex align-items-center">
+                                      <h4 class="mb-0 me-3">總計金額：</h4>
+                                      <div class="reservation_form_input" style="width: 200px;">
+                                          <input type="text" [value]="calculateTotal() + ' 元整'" readonly>
+                                      </div>
+                                  </div>
+                              </div>
+
+                              <!-- 付款方式選擇 -->
+                              <div class="payment-method mb-4">
+                                  <h4 class="mb-3">付款方式：</h4>
+                                  <div class="d-flex flex-wrap gap-3">
+                                      <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" value="creditCard">
+                                          <label class="form-check-label" for="creditCard">
+                                              信用卡
+                                          </label>
+                                      </div>
+                                      <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="paymentMethod" id="webATM" value="webATM">
+                                          <label class="form-check-label" for="webATM">
+                                              網路ATM
+                                          </label>
+                                      </div>
+                                      <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="paymentMethod" id="convenience" value="convenience">
+                                          <label class="form-check-label" for="convenience">
+                                              超商條碼繳費
+                                          </label>
+                                      </div>
+                                      <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="paymentMethod" id="virtualAccount" value="virtualAccount">
+                                          <label class="form-check-label" for="virtualAccount">
+                                              虛擬帳號
+                                          </label>
+                                      </div>
+                                  </div>
+                              </div>
+
+                              <!-- 驗證碼 -->
+                              <div class="captcha-section mb-4">
+                                  <h4 class="mb-3">驗證碼：</h4>
+                                  <div class="d-flex align-items-center gap-3">
+                                      <div class="reservation_form_input" style="width: 150px;">
+                                          <input type="text" placeholder="請輸入驗證碼">
+                                      </div>
+                                      <div class="captcha-image" style="background-color: #f0f0f0; padding: 10px; border-radius: 4px;">
+                                          驗證碼圖片
+                                      </div>
+                                      <button class="btn btn-outline-secondary btn-sm">重新產生</button>
+                                  </div>
+                              </div>
+
+                              <!-- 按��區域 -->
+                              <div class="button-section d-flex justify-content-center gap-3 mt-4">
+                                  <button class="common_btn" (click)="resetForm()">重新填寫</button>
+                                  <button class="common_btn"
+                                          (click)="submitForm()"
+                                          [disabled]="blessedPersons.length === 0">
+                                      確認送出
+                                  </button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+

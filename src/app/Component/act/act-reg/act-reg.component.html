@@ -1,0 +1,175 @@
+<!--==========================
+        BREADCRUMB AREA START
+    ===========================-->
+<section class="breadcrumb_area" style="background: url(assets/images/actImg/background1.png);">
+  <div class="container">
+    <div class="row wow fadeInUp">
+      <div class="col-12">
+        <div class="breadcrumb_text">
+          <h1>活動報名</h1>
+          <ul>
+            <li><a routerLink="/index">首頁 </a></li>
+            <li><a routerLink="/act/index">活動</a></li>
+            <li><a routerLink="/act/detail/{{actDetail?.fActId}}">{{actDetail?.fActName}}</a></li>
+            <li><a routerLink="/act/index">填寫報名</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--==========================
+          BREADCRUMB AREA END
+      ===========================-->
+
+
+<!--==========================
+      CHECKOUT START
+  ===========================-->
+
+<section class="checkout my_pt_0 xs_pt_90">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 wow fadeInLeft">
+        <div class="checkout_area pt_110">
+          <h2>{{actDetail?.fActName}}</h2>
+          <!-- <h3>這是活動名稱</h3> -->
+          <form action="#">
+            <p class="errmessage">{{errnumber}}</p>
+            <div class="row">
+              <div class="col-md-6">
+                <!-- <select class="select_2" name="state">
+                  <option value="AL">活動日期</option>
+                  <option value="{{i}}" *ngFor="let item of actDetail?.dates; let i=index">{{item}}</option>
+                </select> -->
+                <input type="text" [value]="actDateString" name="fRegName[0]" readonly>
+              </div>
+              <div class="col-md-6">
+                <input type="number" [(ngModel)]="Regnum" name="Regnum" (change)="addform()" max="10" min="1">
+              </div>
+              <div class="col-md-6">
+                <input type="text" placeholder="姓名" [(ngModel)]="regList[0].fRegName" name="fRegName[0]"
+                  value="{{regList[0].fRegName}}" readonly>
+              </div>
+              <div class="col-md-6">
+                <input type="text" value="第1位" disabled>
+              </div>
+              <div class="col-md-6">
+                <input type="email" placeholder="信箱" name="fRegEmail[0]" [(ngModel)]="regList[0].fRegEmail" readonly>
+              </div>
+              <div class="col-md-6">
+                <input type="text" placeholder="連絡電話" name="fRegTel[0]" [(ngModel)]="regList[0].fRegTel">
+              </div>
+              <div class="col-md-12">
+                <input type="text" placeholder="地址" name="fRecipientAddress[0]"
+                  [(ngModel)]="regList[0].fRecipientAddress">
+              </div>
+            </div>
+
+
+            <!-- for迴圈 -->
+            <ng-container *ngIf="Regnum && Regnum<11 && Regnum>=1">
+              <div class="row" *ngFor="let n of [].constructor(this.Regnum - 1); let i = index"
+                style="padding-top: 1.2rem;">
+                <hr style="padding-bottom: 15px;">
+                <div class="col-md-6">
+                  <input type="text" placeholder="姓名" name="fRegName[{{i+1}}]" [(ngModel)]="regList[i+1].fRegName">
+                </div>
+                <div class="col-md-6">
+                  <input type="text" value="第{{i+2}}位" disabled>
+                </div>
+                <div class="col-md-6">
+                  <input type="email" placeholder="信箱" name="fRegEmail[{{i+1}}]" [(ngModel)]="regList[i+1].fRegEmail">
+                </div>
+                <div class="col-md-6">
+                  <input type="text" placeholder="連絡電話" name="fRegTel[{{i+1}}]" [(ngModel)]="regList[i+1].fRegTel">
+                </div>
+                <div class="col-md-12">
+                  <input type="text" placeholder="地址" name="fRecipientAddress[{{i+1}}]"
+                    [(ngModel)]="regList[i+1].fRecipientAddress">
+                </div>
+              </div>
+            </ng-container>
+
+
+
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-7 wow fadeInRight pt_110">
+        <div class="checkout_sidebar">
+          <div class="cart_summery">
+            <h6>報名費用</h6>
+            <!-- <p>單人費用<span>{{actDetail?.fRegFee | forMoneyPipe}}</span></p> -->
+            <p>單人費用
+              <span>
+                {{actfee}}
+              </span>
+              <!-- <span *ngIf="actDetail?.fRegFee === 0; else feeTemplate">免費</span>
+              <ng-template #feeTemplate>
+                <span *ngIf="actDetail?.fRegFee">{{ actDetail?.fRegFee | forMoneyPipe }}</span>
+              </ng-template> -->
+            </p>
+            <p>報名人數<span>{{Regnum}}</span></p>
+            <p class="total"><span>總額:</span> <span>{{fRegFee}}</span></p>
+            <br>
+            <a class="common_btn" type="button" (click)="saveToIndex()" style="background-color: #f2A22A;">暫存返回首頁</a>
+            <!-- <a class="common_btn" type="button" (click)="routingReg()" class="single_payment" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">送出完成訂單</a> -->
+
+            <a class="single_payment common_btn" data-bs-toggle="modal" data-bs-target="#exampleModal"
+              (click)="checkData()">
+              送出完成訂單</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 訂單確認 -->
+<div class="payment_modal">
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+
+          <div class="pay_modal_info" [hidden]="!showBox">
+            <div class="checkout_sidebar">
+              <div class="cart_summery">
+                <h6>訂單確認</h6>
+                <p>單人費用
+                  <span>
+                    {{actfee}}
+                  </span>
+                </p>
+                <p>報名人數<span>{{Regnum}}</span></p>
+                <p class="total"><span>總額:</span> <span>{{fRegFee}}</span></p>
+              </div>
+            </div>
+            <div class="payment_btn_area">
+              <button type="button" class="btn btn-danger common_btn" data-bs-dismiss="modal">取消送出</button>
+              <button type="button" class="btn btn-success common_btn" (click)="saveToPay()">送出付款</button>
+            </div>
+          </div>
+
+          <div class="pay_modal_info" [hidden]="showBox">
+            <ul>
+              <li *ngIf="!isEmpty">欄位不可留白</li>
+              <li *ngIf="!mailError">信箱格式錯誤</li>
+              <li *ngIf="!telError">連絡電話格式錯誤</li>
+            </ul>
+            <div class="payment_btn_area">
+              <button type="button" class="btn btn-danger common_btn" data-bs-dismiss="modal">返回修改</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--==========================
+      CHECKOUT END
+  ===========================-->

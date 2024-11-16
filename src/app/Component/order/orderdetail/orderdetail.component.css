@@ -1,0 +1,33 @@
+.review_btn {
+  color: var(--colorBlack);
+  font-weight: 500;
+  font-size: 12px;
+  /* 調整字體大小 */
+  padding: 8px 12px;
+  /* 調整內距縮小按鈕 */
+  border-radius: 4px;
+  /* 調整邊框圓角 */
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  background: var(--colorYellow);
+  font-family: var(--paraFont);
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  text-transform: uppercase;
+  transition: all linear .3s;
+  -webkit-transition: all linear .3s;
+  -moz-transition: all linear .3s;
+  -ms-transition: all linear .3s;
+  -o-transition: all linear .3s;
+}
+
+.review_btn_area {
+  display: flex;
+  justify-content: space-between;
+}
+
+.review_btn {
+  white-space: nowrap; /* 防止文字換行 */
+}

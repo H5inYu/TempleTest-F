@@ -1,0 +1,80 @@
+    <!--==========================
+        SIGN UP START
+    ===========================-->
+    <section class="sign_up sign_in reservation_page pt_120 xs_pt_100">
+      <div class="row justify-content-center">
+
+          <div class="col-xl-6 col-md-10 col-lg-6 wow fadeInRight">
+              <div class="sign_in_form">
+                  <a class="sign_in_logo" routerLink="/index">
+                      <img src="assets/images/1-1.png" alt="sign in" class="img-fluid w-100">
+                  </a>
+                  <h2>註冊帳戶</h2>
+                  <p class="description">請輸入您的基本資料開始註冊</p>
+                  <form class="info_edit_form"  #signupForm="ngForm">
+                      <div class="row">
+                          <div class="col-md-6">
+                              <input type="text" name="FUserName" [(ngModel)]="user.FUserName" placeholder="姓名" required class="form-control">
+                              <div *ngIf="signupForm.controls['FUserName']?.invalid && signupForm.controls['FUserName']?.touched" class="error-message">
+                                <p>姓名為必填項目</p>
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                              <input type="text" name="FUserPhone" [(ngModel)]="user.FUserPhone" placeholder="電話" required pattern="^09\d{8}$" class="form-control">
+                              <div *ngIf="signupForm.controls['FUserPhone']?.invalid && signupForm.controls['FUserPhone']?.touched" class="error-message">
+                                <p>未符合電話格式，格式為09開頭且10個數字</p>
+                              </div>
+                          </div>
+                          <div class="col-xl-12">
+                              <input type="email" name="FUserEmail" [(ngModel)]="user.FUserEmail" placeholder="信箱" required email class="form-control">
+                              <div *ngIf="signupForm.controls['FUserEmail']?.invalid && signupForm.controls['FUserEmail']?.touched" class="error-message">
+                                <p>未符合信箱的格式</p>
+                              </div>
+                              <div *ngIf="emailError" class="error-message">
+                                <p>{{ emailError }}</p>
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                              <input type="password" placeholder="密碼" name="FUserPassword" [(ngModel)]="user.FUserPassword" required minlength="8" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" class="form-control">
+                              <div *ngIf="signupForm.controls['FUserPassword']?.invalid && signupForm.controls['FUserPassword']?.touched" class="error-message">
+                                <p>至少要一個英文字及數字，且不能低於8碼</p>
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                              <input type="password" placeholder="確認密碼" name="confirmPassword" [(ngModel)]="confirmPassword" required class="form-control">
+                              <div *ngIf="confirmPasswordError" class="error-message">
+                                <small>{{ confirmPasswordError }}</small>
+                              </div>
+                          </div>
+                          <div class="col-12 pt_25">
+                              <button  class="common_btn" type="submit" (click)="onSubmit(signupForm)" [disabled]="signupForm.invalid" style="display: block; margin: 0 auto;">註冊</button>
+                          </div>
+                      </div>
+                  </form>
+                  <p class="or">其他註冊方式</p>
+                  <ul>
+                      <li>
+                          <a href="#">
+                              <span>
+                                  <img src="assets/images/google_icon.svg" alt="google" class="img-fluid w-100">
+                              </span>
+                              Google
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#">
+                              <span>
+                                  <img src="assets/images/LINEicon.png" alt="facebook" class="img-fluid w-100">
+                              </span>
+                              Line
+                          </a>
+                      </li>
+                  </ul>
+                  <p class="dont_account">已經有帳戶? <a routerLink="/user/login">登入</a></p>
+              </div>
+          </div>
+      </div>
+  </section>
+  <!--==========================
+      SIGN UP END
+  ===========================-->

@@ -1,0 +1,146 @@
+<!--==========================
+        BREADCRUMB AREA START
+    ===========================-->
+<section class="breadcrumb_area" style="background: url(assets/images/actImg/background1.png);">
+  <div class="container">
+    <div class="row wow fadeInUp">
+      <div class="col-12">
+        <div class="breadcrumb_text">
+          <h1>活動。{{actDetail?.fActName}}</h1>
+          <ul>
+            <li><a routerLink="/index">首頁 </a></li>
+            <li><a routerLink="/act/index">活動</a></li>
+            <li><a routerLink="/act/detail/{{actDetail?.fActId}}">{{actDetail?.fActName}}</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--==========================
+      BREADCRUMB AREA END
+  ===========================-->
+
+
+
+
+<!--==========================
+        CHEFS DETAILS START
+    ===========================-->
+<section class="chef_details_area pt_120 xs_pt_100">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-5 col-md-6 wow fadeInLeft">
+        <div class="chefs_details_img">
+          <img *ngIf="actDetail?.fActImgName" src="assets/images/actImg/act/{{actDetail?.fActImgName}}" alt="活動圖片"
+            class="actImg">
+          <!-- class="img-fluid w-100" -->
+        </div>
+      </div>
+      <div class="col-lg-7 col-md-12 wow fadeInRight">
+        <div class="chefs_description">
+          <h5>{{actDetail?.fActCategory}}</h5>
+          <h2>{{actDetail?.fActName}}</h2>
+
+          <h4 class="myprice">{{actfee|forMoneyPipe}}</h4>
+
+          <!-- <p>Modern an unknown printer took a galley of type and scrambled it to make a type one
+            specimen bookIt hasey survived not only five centuries, but also the leap into electronic
+            typesetting, remaining essentially unch anged. It was popularised in tf Letraset sheets
+            containing.Pizzhen an unknown printer took.</p> -->
+
+          <div class="details_short_description">
+            <label class="form-check-label" for="large">
+              活動地點:{{actDetail?.fActLocation}}
+              <!-- <span>+ $350</span> -->
+            </label><br>
+            <h3>活動日期</h3>
+
+            <div class="details_size" style="width: 600px;" *ngFor="let item of actDetail?.actDetailDate; let i=index">
+              <!-- <h5>活動日期</h5> -->
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="date{{i}}"
+                  [(ngModel)]="selectedDate" value="{{i}}" [disabled]="item.fStatusId==8">
+                <label class="form-check-label" for="date{{i}}">
+                  {{item.dates}}
+                </label>
+              </div>
+              <!-- <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="medium">
+                <label class="form-check-label" for="medium">
+                  批次日期2
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="small">
+                <label class="form-check-label" for="small">
+                  批次日期3
+                </label>
+              </div> -->
+            </div>
+
+            <div class="details_cart_btn">
+              <a class="common_btn" type="button" (click)="routingReg()" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">
+                <span class="icon">
+                  <img src="assets/images/cart_icon_1.png" alt="order" class="img-fluid w-100">
+                </span>
+                即刻填寫報名
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class=" row mt_120 xs_mt_100 wow fadeInUp">
+      <div class="col-12">
+        <div class="menu_det_content_area">
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
+                type="button" role="tab" aria-controls="nav-home" aria-selected="true">活動介紹</button>
+            </div>
+          </nav>
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"
+              tabindex="0">
+              <div class="menu_det_description">
+                <p>{{actDetail?.fActDescription}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!--==========================
+      CHEFS DETAILS END
+  ===========================-->
+
+
+<!-- 日期選擇警告 -->
+<div class="payment_modal" *ngIf="!this.selectedDate">
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+
+          <div class="pay_modal_info">
+            <ul>
+              <li>請選擇活動日期</li>
+            </ul>
+            <div class="payment_btn_area">
+              <button type="button" class="btn btn-danger common_btn" data-bs-dismiss="modal">返回修改</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

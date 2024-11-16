@@ -1,0 +1,135 @@
+<section class="dashboard pt_120 xs_pt_80">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-3 col-lg-4 wow fadeInLeft">
+        <div class="dashboard_sidebar">
+          <div class="dashboard_sidebar_user">
+            <div class="img">
+              <img src="assets/images/matchImages/Michael.png" alt="dashboard" class="img-fluid w-100">
+              <label for="profile_photo"><i class="far fa-camera"></i></label>
+              <input type="file" id="profile_photo" hidden>
+            </div>
+            <h3>Michael</h3>
+          </div>
+          <div class="dashboard_sidebar_menu">
+            <ul>
+              <li><a routerLink="/user/personelinfo"><i class="fas fa-user"></i> 會員資料</a></li>
+              <li><a routerLink="/act/userarea"><i class="fas fa-clipboard-list"></i> 活動紀錄</a>
+              </li>
+              <li><a class="active" routerLink="/orderlist"><i class="fas fa-shopping-basket"></i>
+                  訂單列表</a></li>
+              <li><a routerLink="/donaterecord"><i class="fas fa-star"></i> 捐款紀錄</a></li>
+              <li><a href="dashboard_wishlist.html"><i class="fas fa-heart"></i> 願望清單</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-9 col-lg-8 wow fadeInRight">
+        <div class="dashboard_content">
+          <a class="back_btn common_btn" routerLink="/orderlist"><i
+              class="far fa-long-arrow-left"></i>返回訂單列表<span></span></a>
+          <div class="dashboard_order_invoice">
+            <div class="dashboard_invoice_logo_area">
+              <div class="invoice_logo">
+                <img src="/assets/images/1-1.png" alt="logo" class="img-fluid w-100">
+              </div>
+              <div class="text">
+                <h2>訂單明細</h2>
+                <p>訂單號碼 : #{{ orderData?.orderId }}</p>
+                <p>訂單日期 : {{ orderData?.orderDate }}</p>
+              </div>
+            </div>
+            <div class="dashboard_invoice_header">
+              <div class="text">
+                <h2>收件人</h2>
+                <ul>
+                  <li><span>姓名:</span> {{ orderData?.recepientName }}</li>
+                  <li><span>電子信箱:</span> {{ orderData?.recepientEmail }}</li>
+                  <li><span>電話:</span> {{ orderData?.recepientPhone }}</li>
+                  <li><span>地址:</span> {{ orderData?.recepientAddress }}</li>
+                </ul>
+              </div>
+              <div class="text">
+                <h2>訂單備註</h2>
+                <p>{{ orderData?.orderRemarks }}</p>
+              </div>
+            </div>
+
+            <div class="invoice_table dashboard_order">
+              <div class="table-responsive">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>商品名稱</th>
+                      <th>價格</th>
+                      <th>數量</th>
+                      <th>小計</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let product of orderData?.products">
+                      <td>{{ product.prodName }}</td>
+                      <td>${{ product.prodSellingPrice }}</td>
+                      <td>{{ product.quantity }}</td>
+                      <td>${{ product.price }}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="3"><b>總計</b></td>
+                      <td><b>${{ orderData?.totalPrice }}</b></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="dashboard_invoice_footer text-end">
+              <!-- <h4>Notes</h4>
+              <p>謝謝惠顧</p> -->
+              <!-- <a class="common_btn" href="#"><i class="far fa-table"></i>匯出EXCEL<span></span></a> -->
+              <button (click)="exportToCSV()" class="common_btn"><i class="far fa-table"></i>匯出 CSV</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 評價彈出視窗 -->
+<div class="modal fade" id="reviewModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="review_modal_info">
+          <h4 class="text-center">填寫商品評價</h4>
+          <form>
+            <div class="mb-3 row align-items-center">
+              <label class="col-md-3 col-form-label">星等</label>
+              <div class="col-md-9">
+                <select id="ratingSelect" class="form-control" required>
+                  <option value="">請選擇星等</option>
+                  <option value="5">5</option>
+                  <option value="4">4</option>
+                  <option value="3">3</option>
+                  <option value="2">2</option>
+                  <option value="1">1</option>
+                </select>
+              </div>
+            </div>
+            <div class="mb-3 row align-items-center">
+              <label class="col-md-3 col-form-label">評價內容</label>
+              <div class="col-md-9">
+                <textarea class="form-control" rows="3" placeholder="請填寫評價內容"></textarea>
+              </div>
+            </div>
+            <div class="review_btn_area">
+              <button type="button" class="btn btn-danger common_btn" data-bs-dismiss="modal">取消</button>
+              <!-- <button type="button" class="btn btn-primary" id="testAlertBtn">測試跳出 Alert</button> -->
+              <button type="submit" class="btn btn-success common_btn" id="submitReviewBtn">提交評價</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

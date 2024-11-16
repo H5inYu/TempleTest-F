@@ -1,0 +1,126 @@
+.selected {
+  background-color: #FF8F59;
+  /* 設定選中顏色 */
+  color: #FFFFFF;
+  /* 設定選中文字的顏色 */
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  /* 設定字體加粗 */
+  font-size: 16px;
+  /* 設定字體大小 */
+  font-family: Arial, sans-serif;
+  /* 設定字體樣式 */
+  padding: 5px 10px;
+  /* 增加內邊距，讓選中效果更顯著 */
+  transition: background-color 0.3s ease;
+  /* 添加平滑過渡效果 */
+}
+
+/* 滑鼠懸停效果 */
+.selected:hover {
+  background-color: #C00000;
+  /* 更深的紅色，當滑鼠懸停時 */
+}
+
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #FFB5B5;
+  /* 綠色背景 */
+  color: #000000;
+  /* 深綠色文字 */
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  font-size: 16px;
+}
+
+.flex_container {
+  display: flex;               /* 使用 Flexbox 讓子元素並排顯示 */
+  align-items: center;         /* 垂直置中對齊 */
+  gap: 10px;                   /* 圖片和按鈕之間的距離 */
+}
+
+.sidebar_icon {
+  width: 50px !important;      /* 圖片寬度 */
+  height: 50px !important;     /* 圖片高度 */
+  border-radius: 10px;
+}
+
+.update_preferences_button {
+  padding: 10px 20px;          /* 按鈕內距 */
+  font-size: 16px;             /* 按鈕字體大小 */
+  cursor: pointer;             /* 鼠標樣式 */
+  background-color: 	#AE0000;   /* 按鈕背景色 */
+  color: #fff;                 /* 按鈕文字顏色 */
+  border: none;                /* 移除邊框 */
+  border-radius: 8px;          /* 圓角邊框 */
+  transition: background 0.3s; /* 過渡效果 */
+}
+
+.update_preferences_button:hover {
+  background-color: 	#600000;   /* 滑鼠懸停時的顏色變化 */
+}
+
+.single_menu_text .title {
+  display: block;
+  margin-bottom: 10px; /* 調整暱稱與下方之間的距離 */
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.single_menu_text .descrption {
+  margin: 2px 0;
+  line-height: 1.2;
+}
+
+.single_menu_text .add_to_cart {
+  margin-top: 10px; /* 調整按鈕與上方內容的距離 */
+}
+
+/*分頁*/
+.page-link {
+  background-color: #f0f0f0; /* 預設背景顏色 */
+  color: #000; /* 預設文字顏色 */
+  border-radius: 80%; /* 圓角效果 */
+  border: none; /* 移除邊框 */
+  width: 40px; /* 寬度 */
+  height: 40px; /* 高度 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-link.arrow {
+  background-color: transparent; /* 移除箭頭按鈕的背景顏色 */
+}
+.page-link.arrow:hover {
+  background-color: transparent; /* 保持箭頭按鈕在滑鼠懸停時的背景透明 */
+  color: #750000; /* 可以改變箭頭顏色來顯示交互效果，這裡是藍色 */
+}
+.page-link.arrow .fa-arrow-left,
+.page-link.arrow .fa-arrow-right {
+  border: none; /* 移除圖標邊框 */
+  background: none; /* 確保圖標背景是透明的 */
+}
+
+.page-link:hover {
+  background-color: #750000; /* 滑鼠懸停時變藍 */
+  color: #fff; /* 文字變白 */
+}
+
+.page-link.active {
+  background-color: 	#AE0000; /* 當前頁面的背景顏色為綠色 */
+  color: #fff; /* 當前頁面的文字顏色為白色 */
+  border-color: 	#AE0000; /* 邊框顏色 */
+}
+
+.page-link.disabled {
+  background-color: #e9ecef; /* 禁用按鈕背景顏色 */
+  color: #6c757d; /* 禁用按鈕文字顏色 */
+  cursor: not-allowed; /* 禁用按鈕的鼠標樣式 */
+}
+

@@ -1,0 +1,71 @@
+<section class="dashboard pt_120 xs_pt_80">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-3 col-lg-4 wow fadeInLeft">
+        <div class="dashboard_sidebar">
+          <div class="dashboard_sidebar_user">
+            <div class="img">
+              <img src="assets/images/matchImages/Michael.png" alt="dashboard" class="img-fluid w-100">
+              <label for="profile_photo"><i class="far fa-camera"></i></label>
+              <input type="file" id="profile_photo" hidden>
+            </div>
+            <h3>Michael</h3>
+          </div>
+          <div class="dashboard_sidebar_menu">
+            <ul>
+              <li><a routerLink="/user/personelinfo"><i class="fas fa-user"></i> 會員資料</a></li>
+              <li><a routerLink="/act/userarea"><i class="fas fa-clipboard-list"></i> 活動紀錄</a>
+              </li>
+              <li><a routerLink="/orderlist"><i class="fas fa-shopping-basket"></i> 訂單列表</a></li>
+              <li><a class="active" href="dashboard_review.html"><i class="fas fa-star"></i> 捐款紀錄</a></li>
+              <li><a routerLink="/donaterecord"><i class="fas fa-heart"></i> 願望清單</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-9 col-lg-8 wow fadeInRight">
+        <div class="dashboard_content">
+          <h2 class="dashboard_title">捐款紀錄</h2>
+          <div class="dashboard_reviews">
+
+            <!-- 使用 *ngFor 來顯示 donations 陣列中的每一筆捐款紀錄 -->
+            <div *ngFor="let donation of donations" class="single_review">
+              <div class="img">
+                <img src="assets/images/orderImg/donate1.png" alt="Record" class="img-fluid w-100">
+              </div>
+              <div class="text">
+                <h4>捐款編號: {{ donation.fDonationId }}<span>{{ donation.fDonationDate | date:'yyyyMMdd' }}</span></h4>
+                <p>捐款金額: ${{ donation.fAmount }}</p>
+              </div>
+            </div>
+
+            <!-- 顯示頁碼 -->
+            <div class="pagination_area mt_35 xs_mb_60 wow fadeInUp">
+              <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                  <li class="page-item">
+                    <a class="page-link" aria-label="Previous" (click)="onPageChange(currentPage - 1)">
+                      <i class="far fa-arrow-left"></i>
+                    </a>
+                  </li>
+
+                  <li *ngFor="let page of [].constructor(totalPages); let i = index" class="page-item"
+                    [class.active]="currentPage === i + 1"
+                    [ngClass]="{'current-page': currentPage === i + 1}">
+                    <a class="page-link" (click)="onPageChange(i + 1)">{{ i + 1 }}</a>
+                  </li>
+
+                  <li class="page-item" [class.disabled]="currentPage === totalPages">
+                    <a class="page-link" aria-label="Next" (click)="onPageChange(currentPage + 1)">
+                      <i class="far fa-arrow-right"></i>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

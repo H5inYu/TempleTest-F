@@ -1,0 +1,13 @@
+.form-check-input {
+  width: 20px !important;
+  height: 20px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+  transform: scale(1) !important; /* 強制不使用 Bootstrap 縮放 */
+}
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 4px;
+}

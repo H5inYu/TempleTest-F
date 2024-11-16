@@ -1,0 +1,52 @@
+.container {
+  margin-top: 150px; /* 可以根據需要調整數值 */
+  background-color: #ffffff; /* 容器背景色 */
+  padding: 40px; /* 內邊距 */
+  border-radius: 10px; /* 圓角 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 陰影 */
+
+  /* 新增的 Flexbox 配置 */
+  display: flex;
+  flex-direction: column; /* 垂直排列內容 */
+  align-items: center; /* 水平置中所有內容 */
+}
+
+.icon img {
+  width: 50px;
+    height: 50px;
+    max-width: 50px; /* 確保圖片不超出 16px */
+    max-height: 50px; /* 確保圖片不超出 16px */
+    object-fit: contain; /* 確保圖片不變形 */
+    display: block; /* 避免圖片因為行內元素的特性受其他樣式影響 */
+}
+
+.title {
+  font-size: 36px; /* 標題字體大小 */
+  margin: 20px 0; /* 上下邊距 */
+}
+
+.order-number {
+  font-size: 24px; /* 訂單編號字體大小 */
+  margin: 10px 0; /* 上下邊距 */
+}
+
+.description {
+  font-size: 18px; /* 說明文字字體大小 */
+  margin: 10px 0; /* 上下邊距 */
+}
+
+.button {
+  display: inline-block; /* 讓按鈕顯示為區塊 */
+  background-color: #007bff; /* 按鈕背景色 */
+  color: white; /* 按鈕文字顏色 */
+  padding: 10px 20px; /* 按鈕內邊距 */
+  border-radius: 5px; /* 圓角 */
+  text-decoration: none; /* 去掉底線 */
+  font-size: 18px; /* 按鈕字體大小 */
+  margin-top: 20px; /* 上邊距 */
+  transition: background-color 0.3s; /* 背景顏色過渡效果 */
+}
+
+.button:hover {
+  background-color: #0056b3; /* 懸停時的背景顏色 */
+}

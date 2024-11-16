@@ -1,0 +1,28 @@
+.gender-group {
+  margin-top: 10px;
+}
+
+.form-check-inline {
+  margin-right: 20px;
+}
+
+.form-check-input {
+  cursor: pointer;
+}
+
+.form-check-label {
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+/* 自訂 radio button 樣式 */
+.form-check-input[type="radio"] {
+  width: 18px;
+  height: 18px;
+}
+
+/* 選中時的樣式 */
+.form-check-input:checked {
+  background-color: #AE0000;
+  border-color: #AE0000;
+}

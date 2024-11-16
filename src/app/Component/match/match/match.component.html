@@ -1,0 +1,318 @@
+<!--==========================
+        BREADCRUMB AREA START
+    ===========================-->
+<section class="breadcrumb_area" style="background: url(assets/images/matchImages/match01.jpg);">
+  <div class="container">
+    <div class="row wow fadeInUp">
+      <div class="col-12">
+        <div class="breadcrumb_text">
+          <h1>月老牽線</h1>
+          <ul>
+            <li><a href="/matchIndex">月老首頁 </a></li>
+            <li><a href="/match">月老牽線</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--==========================
+          BREADCRUMB AREA END
+      ===========================-->
+
+<!--==========================
+            MENU STYLE 03 START
+        ===========================-->
+<section class="menu_grid_view mt_120 xs_mt_100">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-3 col-lg-4 col-md-6 order-2 wow fadeInLeft">
+        <div class="menu_sidebar sticky_sidebar">
+          <!-- 更新興趣特質 -->
+          <div class="sidebar_wizard sidebar_search">
+            <div class="flex_container">
+              <img src="assets/images/matchImages/edit.gif" alt="更新圖示" class="sidebar_icon">
+              <div class="update_preferences">
+                <button type="button" class="update_preferences_button" (click)="navigateToMatchEdit()">
+                  更新我的興趣特質
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 偏好性別 -->
+          <div class="sidebar_wizard sidebar_price_ranger mt_25">
+            <div class="details_size">
+              <h5>偏好性別</h5>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="male" (change)="setGender('男')" checked>
+                <label class="form-check-label" for="male">男</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="female" (change)="setGender('女')">
+                <label class="form-check-label" for="female">女</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- 年齡範圍 -->
+          <div class="sidebar_wizard sidebar_price_ranger mt_25">
+            <h2>年齡範圍: {{ ageRange[0] }} - {{ ageRange[1] }} 歲</h2>
+            <div #sliderRange></div>
+          </div>
+          <!-- 身高範圍 -->
+          <div class="sidebar_wizard sidebar_price_ranger mt_25">
+            <h2>身高範圍: {{ heightRange[0] }} - {{ heightRange[1] }} 公分</h2>
+            <div #rangeSlider></div>
+          </div>
+          <!-- 興趣分類 -->
+          <div class="sidebar_wizard sidebar_category mt_25">
+            <h2>興趣分類</h2>
+            <ul>
+              <li *ngFor="let hobby of hobbies" (click)="toggleHobby(hobby)"
+                [class.selected]="selectedHobbies.includes(hobby)">
+                {{ hobby }}
+              </li>
+            </ul>
+          </div>
+          <!-- 特質分類 -->
+          <div class="sidebar_wizard sidebar_tags mt_25">
+            <h2>特質分類</h2>
+            <ul>
+              <li *ngFor="let trait of traits" (click)="toggleTrait(trait)"
+                [class.selected]="selectedTraits.includes(trait)">
+                {{ trait }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- 會員圖卡 -->
+      <div class="col-xl-9 col-lg-8 order-lg-2">
+        <div class="row">
+          <div class="col-xl-4 col-sm-6 wow fadeInUp" *ngFor="let user of filteredUsers">
+            <div class="single_menu">
+              <div class="single_menu_img">
+                <img [src]="user.base64ImageData" alt="menu" class="img-fluid w-100">
+                <div class="notification" *ngIf="showNotification">
+                  發送愛心!
+                </div>
+
+                <ul>
+                  <li>
+                    <a (click)="sendHeart()">
+                      <i class="far fa-heart"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="single_menu_text">
+                <a class="title">{{ user.userNickName }}</a>
+                <p class="descrption">
+                  <strong>性別/年齡:</strong> {{ user.gender }}，{{ user.age }}歲
+                </p>
+                <p class="descrption">
+                  <strong>身高:</strong> {{ user.height }} 公分
+                </p>
+                <p class="descrption">
+                  <strong>興趣:</strong> {{ user.hobbies.join(', ') }}
+                </p>
+                <p class="descrption">
+                  <strong>特質:</strong> {{ user.traits.join(', ') }}
+                </p>
+                <div class="d-flex flex-wrap align-items-center">
+                  <button class="add_to_cart" (click)="openModal(user)" data-bs-toggle="modal"
+                    data-bs-target="#cartModal">
+                    進一步認識
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 會員圖卡 -->
+        <!-- 分頁按鈕 -->
+        <div class="pagination_area mt_35 xs_mb_60 wow fadeInUp">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <li class="page-item" [class.disabled]="currentPage === 1">
+                <button class="page-link arrow" (click)="previousPage()" [disabled]="currentPage === 1"
+                  aria-label="Previous">
+                  <i class="far fa-arrow-left"></i>
+                </button>
+              </li>
+
+              <li class="page-item" *ngFor="let page of pagesArray">
+                <button class="page-link btn-rounded" (click)="goToPage(page)"
+                  [ngClass]="{'active': currentPage === page}">
+                  {{ page }}
+                </button>
+              </li>
+
+              <li class="page-item" [class.disabled]="currentPage === getTotalPages()">
+                <button class="page-link arrow" (click)="nextPage()" [disabled]="currentPage === getTotalPages()"
+                  aria-label="Next">
+                  <i class="far fa-arrow-right"></i>
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <!-- 分頁按鈕 -->
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!--==========================
+              MENU STYLE 03 END
+          ===========================-->
+
+<!-- BRANCH POPUT START -->
+<div class="branch_popup cart_popup" *ngIf="showModal">
+  <div class="modal fade show" id="cartModal" tabindex="-1" aria-modal="true" role="dialog" style="display: block;">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()">
+            <i class="fal fa-times"></i>
+          </button>
+          <div class="branch_popup_img">
+            <img [src]="selectedUser?.base64ImageData" alt="menu" class="img-fluid w-100">
+          </div>
+          <div class="branch_popup_text">
+            <a class="title">{{ selectedUser?.userNickName }}</a>
+            <p class="description">{{ selectedUser?.bio }}</p>
+            <!-- <p class="description">======={{ selectedUser.userId }}</p> -->
+            <!-- <div class="branch_contact">
+              <a class="branch_call_mail" href="mailto:support@RESTINAgmail.com">
+                <i class="fas fa-envelope"></i>
+              </a>
+              <label>寄出感興趣通知信</label>
+            </div> -->
+            <div >
+              <button (click)="sendEmail()">寄出感興趣通知信</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- BRANCH POPUT END -->
+
+<!--==========================
+              SCROLL BUTTON START
+          ===========================-->
+<div class="progress-wrap">
+  <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+    <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+  </svg>
+</div>
+<!--==========================
+              SCROLL BUTTON END
+          ===========================-->
+
+
+<!--jquery library js-->
+<script src="assets/js/jquery-3.7.1.min.js"></script>
+<!--bootstrap js-->
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+<!--font-awesome js-->
+<script src="assets/js/Font-Awesome.js"></script>
+<!--nice select js-->
+<script src="assets/js/jquery.nice-select.min.js"></script>
+<!--marquee js-->
+<script src="assets/js/jquery.marquee.min.js"></script>
+<!--slick js-->
+<script src="assets/js/slick.min.js"></script>
+<!--countup js-->
+<script src="assets/js/jquery.waypoints.min.js"></script>
+<script src="assets/js/jquery.countup.min.js"></script>
+<!--venobox js-->
+<!-- <script src="assets/js/venobox.min.js"></script> -->
+<!--scroll button js-->
+<script src="assets/js/scroll_button.js"></script>
+<!--price ranger js-->
+<script src="assets/js/ranger_jquery-ui.min.js"></script>
+<script src="assets/js/ranger_slider.js"></script>
+<!--select 2 js-->
+<script src="assets/js/select2.min.js"></script>
+<!--aos js-->
+<script src="assets/js/wow.min.js"></script>
+<!--colorfulTab js-->
+<script src="assets/js/colorfulTab.min.js"></script>
+<!--sticky sidebar js-->
+<script src="assets/js/sticky_sidebar.js"></script>
+<!--animated barfiller js-->
+<script src="assets/js/animated_barfiller.js"></script>
+<!--animatedheadline js-->
+<script src="assets/js/jquery.animatedheadline.min.js"></script>
+<!--script/custom js-->
+<script src="assets/js/script.js"></script>
+
+
+<!-- 加載 jQuery 和 jQuery UI -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+<!-- 加載 jQuery UI 的 CSS 樣式 -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/smoothness/jquery-ui.css">
+<!-- 年齡和身高滑桿的初始化腳本 -->
+<script>
+  // 年齡滑桿
+  jQuery(function () {
+    jQuery("#slider_range").slider({
+      min: 18,
+      max: 80,
+      values: [18, 80],
+      range: true,
+      create: function () {
+        // 設定範圍條的紅色背景
+        jQuery(this).find(".ui-slider-range").css("background-color", "#D32F2F");
+
+        // 設定把手的紅色背景
+        jQuery(this).find(".ui-slider-handle").css({
+          "background-color": "#D32F2F",  // 紅色把手
+          "border": "none",
+          "border-radius": "50%",  // 圓形把手
+          "width": "16px",
+          "height": "16px"
+        });
+      },
+      slide: function (event, ui) {
+        const scope = angular.element(document.querySelector('app-match')).scope();
+        scope.$apply(() => {
+          scope.component.ageRange = ui.values;
+        });
+      }
+    });
+  });
+
+  // 身高滑桿
+  jQuery(function () {
+    jQuery("#range-slider").slider({
+      min: 140,
+      max: 200,
+      step: 1,
+      values: [140, 200],
+      range: true,
+      create: function () {
+        jQuery(this).find(".ui-slider-range").css("background-color", "#D32F2F");
+        jQuery(this).find(".ui-slider-handle").css({
+          "background-color": "#D32F2F",
+          "border": "none",
+          "border-radius": "50%",
+          "width": "16px",
+          "height": "16px"
+        });
+      },
+      slide: function (event, ui) {
+        const scope = angular.element(document.querySelector('app-match')).scope();
+        scope.$apply(() => {
+          scope.component.heightRange = ui.values;
+        });
+      }
+    });
+  });
+</script>

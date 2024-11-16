@@ -1,0 +1,137 @@
+<!--==========================
+    HEADER START
+===========================-->
+
+
+<!--==========================
+    BREADCRUMB AREA START
+===========================-->
+
+<section class="breadcrumb_area" style="background: url(/assets/images/Greater.jpg);">
+    <div class="container">
+        <div class="row wow fadeInUp">
+            <div class="col-12">
+                <div class="breadcrumb_text">
+                    <h1> 商品分享</h1>
+                    <ul>
+                        <li><a href="/Forumstart">妙語禪心 </a></li>
+                        <li><a href="/Forumproduct"> 商品分享</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--==========================
+    BREADCRUMB AREA END
+===========================-->
+
+<!--==========================
+    DASHBOARD REVIEWS START
+===========================-->
+<section class="dashboard pt_120 xs_pt_80">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-3 col-lg-4 wow fadeInRight">
+                <div class="dashboard_sidebar">
+                    <div class="dashboard_sidebar_user">
+                        <div class="img">
+                            <img src="/assets/images/640.jpeg" alt="dashboard" class="img-fluid w-100">
+                        </div>
+                        <h3>黑塔</h3>
+                        <p>新莊,新北</p>
+                    </div>
+                    <div class="dashboard_sidebar_menu">
+                        <ul>
+                            <li (click)="filterPosts('商品心得')"><a><i class="fas fa-user"></i>商品心得</a></li>
+                            <li (click)="filterPosts('購買建議')"><a><i class="fas fa-clipboard-list"></i>購買建議</a></li>
+                            <li (click)="filterPosts('促銷分享')"><a><i class="fas fa-shopping-basket"></i>促銷分享</a></li>
+                            <li (click)="filterPosts('限時優惠')"><a><i class="fas fa-star"></i>限時優惠</a></li>
+                            <li (click)="filterPosts('隱藏版周邊')"><a><i class="fas fa-key"></i>隱藏版周邊</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-9 col-lg-8 wow fadeInLeft">
+                <div class="dashboard_content">
+                    <div class="title-bar">
+                        <h2>商品分享</h2>
+                        <a href="createPost.html" class="btn-shop">建立貼文</a>
+                    </div>
+                    <div class="search-bar">
+                        <input type="text" id="postSearchInput" placeholder="搜尋貼文標題..." (input)="searchPosts($event)">
+                        <button onclick="searchPosts()">搜尋</button>
+                    </div>
+                    
+                    <div class="dashboard_reviews" id="postContainer">
+                        <!-- 貼文將由 JavaScript 插入此處 -->
+                    </div>
+                     <!-- 隨機推薦貼文區域 -->
+                     <h3 class="mt_30">隨機推薦貼文</h3>
+                     <div id="randomPostsContainer" class="dashboard_reviews mt_30">
+                         <!-- 隨機貼文將由 JavaScript 插入此處 -->
+                     
+                     </div>
+                    <div class="pagination_area mt_30">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-end">
+                                <li class="page-item">
+                                    <a class="page-link" href="javascript:void(0);" onclick="changePage(-1)" aria-label="Previous">
+                                        <i class="far fa-arrow-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item"><span id="pageDisplay">1</span></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="javascript:void(0);" onclick="changePage(1)" aria-label="Next">
+                                        <i class="far fa-arrow-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 貼文區域結束 -->
+
+    <!--================================
+        DASHBOARD REVIEWS END
+    =================================-->
+  
+  
+    <!--==========================
+        FOOTER START
+    ===========================-->
+  
+    <!--==========================
+        FOOTER END
+    ===========================-->
+  
+  
+    <!--==========================
+        SCROLL BUTTON START
+    ===========================-->
+    <div class="progress-wrap">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+        </svg>
+    </div>
+    <!--==========================
+        SCROLL BUTTON END
+    ===========================-->
+  
+  
+    <!--==========================ng serve
+        RTL BUTTON START
+    ===========================-->
+    
+    <!--==========================
+        RTL BUTTON END
+    ===========================-->
+  
+  
+  
+  

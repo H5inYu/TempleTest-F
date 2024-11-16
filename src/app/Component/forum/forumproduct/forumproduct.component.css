@@ -1,0 +1,50 @@
+.title-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 將標題和按鈕放在兩邊 */
+    margin-bottom: 20px;
+}
+
+.title-bar h2 {
+    margin: 0; /* 移除標題的默認外邊距 */
+}
+
+.title-bar .btn-shop {
+    background-color: #b52a27; /* 深一點的紅色 */
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.title-bar .btn-shop:hover {
+    background-color: #8f1f1d; /* 更深的紅色，用於懸停時 */
+}
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-bar input[type="text"] {
+    padding: 8px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-bar button {
+    background-color: #b52a27;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background-color: #8f1f1d;
+}

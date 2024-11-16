@@ -1,0 +1,216 @@
+<!-- 麵包屑 -->
+<section class="breadcrumb_area" style="background: url(assets/images/orderImg/temple1.jpg);">
+  <div class="container">
+    <div class="row wow fadeInUp">
+      <div class="col-12">
+        <div class="breadcrumb_text">
+          <h1>填寫收件人資料</h1>
+          <ul>
+            <li><a routerLink="/index">首頁 </a></li>
+            <li><a routerLink="/order">填寫收件人資料 </a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 內容 -->
+<section class="checkout pt_90 xs_pt_90">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 wow fadeInLeft">
+        <div class="checkout_area">
+          <h2>收件人資料</h2>
+          <!-- <form>
+            <div class="row">
+              <div class="col-md-6">
+                <input type="text" [(ngModel)]="recepientName" name="name" placeholder="姓名" required>
+              </div>
+              <div class="col-md-6">
+                <input type="email" [(ngModel)]="recepientEmail" name="email" placeholder="電子信箱" required>
+              </div>
+              <div class="col-md-6">
+                <input type="text" [(ngModel)]="recepientPhone" name="phone" placeholder="電話" required>
+              </div>
+              <div class="col-md-6">
+                <input type="text" [(ngModel)]="recepientAddress" name="address" placeholder="地址" required>
+              </div> -->
+
+          <form #orderForm="ngForm">
+            <!-- 顯示打勾選擇同會員資料 -->
+            <div class="col-md-6">
+              <div class="checkbox-container">
+                <input type="checkbox" style="accent-color: var(--colorPrimary);" [(ngModel)]="isSameAsMember"
+                  (change)="onCheckboxChange()" name="isSameAsMember" />
+                <label for="isSameAsMember">使用會員資料</label>
+              </div>
+            </div>
+
+            <div class="row">
+              <!-- 姓名 -->
+              <div class="col-md-6">
+                <input type="text" [(ngModel)]="recepientName" name="name" placeholder="姓名" [readonly]="isSameAsMember"
+                  required minlength="2" #name="ngModel" />
+                <div *ngIf="name.invalid && name.touched" class="text-danger">
+                  <div *ngIf="name.errors?.['required']">*收件人姓名是必填欄位。</div>
+                  <div *ngIf="name.errors?.['minlength']">*姓名至少需要兩個字。</div>
+                </div>
+              </div>
+
+              <!-- 電子郵件 -->
+              <div class="col-md-6">
+                <input type="email" [(ngModel)]="recepientEmail" name="email" placeholder="電子信箱"
+                  [readonly]="isSameAsMember" required email #email="ngModel" />
+                <div *ngIf="email.invalid && email.touched" class="text-danger">
+                  <div *ngIf="email.errors?.['required']">*電子信箱是必填欄位。</div>
+                  <div *ngIf="email.errors?.['email']">*請輸入有效的電子郵件地址。</div>
+                </div>
+              </div>
+
+              <!-- 電話 -->
+              <div class="col-md-6">
+                <input type="text" [(ngModel)]="recepientPhone" name="phone" placeholder="電話"
+                  [readonly]="isSameAsMember" required #phone="ngModel" />
+                <div *ngIf="phone.invalid && phone.touched" class="text-danger">
+                  <div *ngIf="phone.errors?.['required']">*電話是必填欄位。</div>
+                </div>
+              </div>
+
+              <!-- 地址 -->
+              <div class="col-md-6">
+                <input type="text" [(ngModel)]="recepientAddress" name="address" placeholder="地址"
+                  [readonly]="isSameAsMember" required #address="ngModel" />
+                <div *ngIf="address.invalid && address.touched" class="text-danger">
+                  <div *ngIf="address.errors?.['required']">*地址是必填欄位。</div>
+                </div>
+              </div>
+
+              <!-- <div class="col-md-6">
+                <select [(ngModel)]="shippingInfo" name="shipping" class="select_2" required>
+                  <option value="">選擇配送方式</option>
+                  <option value="黑貓宅急便">黑貓宅急便</option>
+                  <option value="郵局">郵局</option>
+                </select>
+              </div> -->
+
+              <section class="payment pt_0 xs_pt_100 mb-3">
+                <div class="payment_area">
+                  <h5>選擇配送方式</h5>
+                  <div>
+                    <input type="radio" id="blackCat" name="shippingMethod" value="黑貓宅急便" [(ngModel)]="shippingInfo"
+                      checked>
+                    <label for="blackCat">黑貓宅急便</label>
+                  </div>
+                  <div>
+                    <input type="radio" id="postOffice" name="shippingMethod" value="郵局" [(ngModel)]="shippingInfo">
+                    <label for="postOffice">郵局</label>
+                  </div>
+                </div>
+              </section>
+
+              <section class="payment pt_0 xs_pt_100">
+                <div class="payment_area">
+                  <h5>選擇付款方式</h5>
+                  <div>
+                    <input type="radio" id="cashOnDelivery" name="paymentMethod" value="貨到付款" [(ngModel)]="paymentInfo"
+                      checked>
+                    <label for="cashOnDelivery">貨到付款</label>
+                  </div>
+                  <div>
+                    <!-- <input type="radio" id="creditCard" name="paymentMethod" value="credit"
+                      (change)="toggleCreditCardInfo('credit')"> -->
+                    <input type="radio" id="creditCard" name="paymentMethod" value="信用卡" [(ngModel)]="paymentInfo">
+                    <label for="creditCard">信用卡</label>
+                  </div>
+
+                  <!-- 信用卡資料欄位 -->
+                  <!-- <div *ngIf="isCreditCardVisible">
+                    <div class="mb-3 row align-items-center">
+                      <h4 class="text-center mt-4">填寫信用卡資料</h4>
+                      <p class="text-center mt-3">請詳閱下列服務條款</p>
+                      <ul class="mt-3">
+                        <li>使用信用卡/金融卡付款，交易成功或失敗請依訂單狀態為主。</li>
+                        <li>如有交易失敗或重複刷卡的情形，您可能仍會收到銀行消費通知，後續會自動協助取消此次授權或進行退刷，於交易日隔天後起算約 7~14 個工作天，就會自動退刷到您的信用卡額度中。</li>
+                        <li>售出不退。</li>
+                      </ul>
+                      <div class="mt-3 mb-3 col-12" style="color: red;">※
+                        部分海外信用卡驗證較嚴格，若交易失敗，請嘗試其他發卡行之信用卡結帳。</div>
+                      <label for="cardHolderName" class="col-md-3 col-form-label">持卡人</label>
+                      <div class="col-md-9">
+                        <input type="text" id="cardHolderName" name="cardHolderName" placeholder="持卡人姓名"
+                          class="form-control" required>
+                      </div>
+                    </div>
+                    <div class="mb-3 row align-items-center">
+                      <label for="cardNumber" class="col-md-3 col-form-label">信用卡號</label>
+                      <div class="col-md-9">
+                        <input type="text" id="cardNumber" name="cardNumber" placeholder="請填寫信用卡號" class="form-control"
+                          required>
+                      </div>
+                    </div>
+                    <div class="mb-3 row align-items-center">
+                      <label for="expiryDate" class="col-md-3 col-form-label">有效期限</label>
+                      <div class="col-md-9">
+                        <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" class="form-control"
+                          required>
+                      </div>
+                    </div>
+                    <div class="mb-3 row align-items-center">
+                      <label for="cvv" class="col-md-3 col-form-label">背面末3碼</label>
+                      <div class="col-md-9">
+                        <input type="text" id="cvv" name="cvv" placeholder="000" class="form-control" required>
+                      </div>
+                    </div>
+                  </div> -->
+                </div>
+              </section>
+
+              <div class="col-md-12 mt-3">
+                <textarea rows="7" [(ngModel)]="orderRemarks" name="remarks" placeholder="訂單備註"></textarea>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-7 wow fadeInRight">
+        <div class="checkout_sidebar">
+          <h2>購物車資料</h2>
+          <div class="cart_summery" *ngIf="shoppingCart">
+            <div *ngIf="shoppingCart">
+              <table>
+                <thead>
+                  <tr>
+                    <th>商品名稱</th>
+                    <th>價格</th>
+                    <th>數量</th>
+                    <th>小計</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of shoppingCart.cartItems">
+                    <td>{{ item.prodName }}</td>
+                    <td>${{ item.prodSellingPrice }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>${{ item.price }}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p class="total"><span>總計: </span> <span>${{ shoppingCart.totalPrice }}</span></p>
+            </div>
+            <div *ngIf="!shoppingCart">
+              <p>購物車內沒有商品。</p>
+            </div>
+            <!-- <a class="common_btn" routerLink="/index" style="background-color: #f2A22A;">返回首頁</a> -->
+            <!-- <a class="common_btn" routerLink="/ordercomplete">確認結帳</a> -->
+            <div class="d-flex justify-content-between mt-3">
+              <button routerLink="/index" class="common_btn" style="background-color: #f2A22A;">返回首頁</button>
+              <button type="button" (click)="submitOrder()" class="common_btn"
+                [disabled]="orderForm.invalid">確認結帳</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

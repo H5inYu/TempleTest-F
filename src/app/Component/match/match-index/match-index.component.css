@@ -1,0 +1,53 @@
+
+
+/* 懸浮按鈕，調整至畫面右側 */
+.floating-button {
+  position: fixed;
+  /* right: 10px; */
+  left: 15px;
+  top: 40%;
+  transform: translateY(-50%);
+  background-color: 	#FFEEDD;
+  color: black;
+  padding: 4px 8px;
+  /* padding: 10px; */
+  border-radius: 15px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 20px; /* 調整字體大小 */
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 130px;
+  height: 130px;
+}
+
+/* 月老圖標或 GIF */
+.fortune-icon {
+  /* width: 5px; 調整為更小的大小 */
+   width: 10px; /*根據需求調整圖片大小 */
+  height: 10px;
+  margin-left: 4px;
+
+}
+
+/* 求籤小視窗 */
+.fortune-modal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  width: 300px;
+  z-index: 1000;
+}
+
+.counter_bg .row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

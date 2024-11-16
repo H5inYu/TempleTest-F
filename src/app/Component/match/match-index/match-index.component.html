@@ -1,0 +1,85 @@
+<!--==========================
+        matchIndex START
+    ===========================-->
+<section class="sign_up sign_in">
+  <div class="row justify-content-center">
+    <div class="col-xl-6 col-lg-6 wow fadeInLeft">
+      <div class="sign_in_img">
+        <img src="assets/images/matchImages/matchIndex.jpg" alt="sign in" class="img-fluid w-100">
+      </div>
+    </div>
+    <div class="col-xl-6 col-md-10 col-lg-6 wow fadeInRight">
+      <div class="sign_in_form">
+        <a class="sign_in_logo" href="index.html">
+          <img src="assets/images/1-1.png" alt="sign in" class="img-fluid w-100">
+        </a>
+        <h2>心動配對，緣來是你</h2>
+        <p class="description">尋找靈魂伴侶？月老將幫您搭建通往幸福的橋樑！</p>
+        <form action="#">
+          <div class="row">
+            <div class="col-12">
+              <button class="common_btn" (click)="navigateToMatch()" [disabled]="isLoading" type="button">馬上參加</button>
+            </div>
+          </div>
+        </form>
+        <!-- 懸浮的求籤按鈕 -->
+        <div class="floating-button" (click)="toggleFortune()">
+          愛情占卜
+          <!-- 月老圖片或 GIF -->
+          <img src="assets/images/matchImages/求籤.gif" alt="月老" class="fortune-icon" />
+        </div>
+
+        <!-- 求籤小視窗 -->
+        <!-- <div *ngIf="isFortuneVisible" class="fortune-modal">
+          <p>{{ currentFortune }}</p>
+          <button (click)="toggleFortune()">關閉</button>
+        </div> -->
+        <div *ngIf="isFortuneVisible" class="fortune-modal">
+          <!-- 當 currentFortune 包含 text 時顯示文字 -->
+          <p *ngIf="currentFortune.text">{{ currentFortune.text }}</p>
+
+          <!-- 當 currentFortune 包含 image 時顯示圖片 -->
+          <img *ngIf="currentFortune.image" [src]="currentFortune.image" alt="籤詩圖片" class="fortune-image" />
+          <button (click)="toggleFortune()">關閉</button>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+<!--==========================
+       matchIndex END
+  ===========================-->
+<!--==========================
+        COUNTER START
+    ===========================-->
+<!-- COUNTER START -->
+<section class="counter_area mt_120 xs_mt_100">
+  <div class="counter_bg pt_30 pb_35">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-sm-6 wow fadeInUp">
+          <div class="single_counter">
+            <h2 class="counter">305</h2>
+            <span> 參加男性人數</span>
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 wow fadeInUp">
+          <div class="single_counter">
+            <h2 class="counter">267</h2>
+            <span>參加女性人數</span>
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 wow fadeInUp">
+          <div class="single_counter">
+            <h2 class="counter">520</h2>
+            <span>歷史配對成功數</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- COUNTER END -->
+<!--==========================
+      COUNTER END
+  ===========================-->

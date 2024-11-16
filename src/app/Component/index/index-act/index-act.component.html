@@ -1,0 +1,154 @@
+<!--==========================
+        BREADCRUMB AREA START
+    ===========================-->
+<section class="breadcrumb_area" style="background: url(assets/images/actImg/background1.png);">
+  <div class="container">
+    <div class="row wow fadeInUp">
+      <div class="col-12">
+        <div class="breadcrumb_text">
+          <h1>廟不可言</h1>
+          <ul>
+            <li><a routerLink="/index">首頁 </a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--==========================
+      BREADCRUMB AREA END
+  ===========================-->
+
+
+
+<!--==========================
+        首頁輪播圖
+        GALLERY START
+        初始圖 assets/images/gallery_img_4.jpg
+    ===========================-->
+
+<section class="gallery mt_115 xs_mt_95">
+  <div class="row gallery_slider">
+    <div class="col-xl-3 wow fadeInUp">
+      <a class="title" routerLink="/act/detail/23">
+        <div class="gallery_item">
+          <img src="assets/images/actImg/鹿耳門煙火.png" alt="鹿耳門煙火" class="img-fluid w-100" title="圖／IG @bb211019 授權分享
+            ">
+          <div class="text">
+            <a class="title" routerLink="/act/detail/23">鹿耳門煙火</a>
+            <p>鹿耳門煙火
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-xl-3 wow fadeInUp">
+      <a class="title" routerLink="/act/detail/14">
+        <div class="gallery_item">
+          <img src="assets/images/actImg/白沙屯.png" alt="白沙屯繞境" class="img-fluid w-100" title="https://www.baishatun.com.tw/
+              ">
+          <div class="text">
+            <a class="title" routerLink="/act/detail/14">白沙屯繞境</a>
+            <p>白沙屯繞境
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-xl-3 wow fadeInUp">
+      <a class="title" routerLink="/matchIndex">
+        <div class="gallery_item">
+          <img src="assets/images/actImg/月老牽線.jpg" alt="月老牽線" class="img-fluid w-100" title="Photoby Aaron Burden on Unsplash
+            ">
+          <div class="text">
+            <a class="title" routerLink="/matchIndex">月老牽線</a>
+            <p>覓良緣</p>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-xl-3 wow fadeInUp">
+      <a class="title" routerLink="/act/detail/21">
+        <div class="gallery_item">
+          <img src="assets/images/actImg/平溪天燈.png" alt="平溪天燈" class="img-fluid w-100" title="由 Jirka Matousek - https://www.flickr.com/photos/jirka_matousek/12431713254/, CC BY 2.0, https://commons.wikimedia.org/w/index.php?curid=145366861
+            ">
+          <div class="text">
+            <a class="title" routerLink="/act/detail/21">平溪天燈</a>
+            <p>平溪天燈
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-xl-3 wow fadeInUp">
+      <a class="title" routerLink="act/detail/22">
+        <div class="gallery_item">
+          <img src="assets/images/actImg/鹽水蜂炮.png" alt="鹽水蜂炮" class="img-fluid w-100" title="https://lifeintainan.com/tag/2018%E9%B9%BD%E6%B0%B4%E8%9C%82%E7%82%AE/
+            ">
+          <div class="text">
+            <a class="title" routerLink="act/detail/22">鹽水蜂炮</a>
+            <p>鹽水蜂炮
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+<!--==========================
+          GALLERY END
+      ===========================-->
+
+
+
+<section class="breakfast_menu mt_60 xs_mt_100">
+  <div class="container">
+    <div class="row wow fadeInUp">
+      <div class="col-xl-8 m-auto">
+        <div class="section_heading mb_25">
+          <!-- <h5>熱門活動</h5> -->
+          <h2>近期活動</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-3 col-sm-6 col-lg-4 wow fadeInUp" *ngFor="let item of actIndexList">
+        <div class="single_menu">
+          <div class="single_menu_img">
+            <img src="assets/images/actImg/act/{{item.fActImgName}}" alt="menu" class="img-fluid w-100">
+            <ul>
+              <li><a [routerLink]="['/act/detail', item.fActId]"><i class="far fa-eye"></i></a></li>
+            </ul>
+          </div>
+          <div class="single_menu_text">
+            <a class="category" [routerLink]="['/act/detail', item.fActId]">{{item.fActCategory}}</a>
+            <a class="title" [routerLink]="['/act/detail', item.fActId]">{{item.fActName | actindexContentPipe
+              }}</a>
+            <p class="descrption">{{item.fActLocation}}</p>
+            <div class="d-flex flex-wrap align-items-center">
+              <a class="add_to_cart" [routerLink]="['/act/detail', item.fActId]" data-bs-toggle="modal"
+                data-bs-target="#cartModal">詳細內容</a>
+              <ng-container *ngIf="item.fRegFee; else elseTemplate">
+                <h3> NT${{item.fRegFee|forMoneyPipe}}元 </h3>
+              </ng-container>
+              <ng-template #elseTemplate>
+                <h3> {{item.fRegFee|forMoneyPipe}} </h3>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 about_2_shefs text-center mt_60 wow fadeInUp">
+        <a class="common_btn" routerLink="/act/index">
+          <span class="icon">
+            <img src="assets/images/eye.png" alt="order" class="img-fluid w-100">
+          </span>
+          檢視更多
+        </a>
+      </div>
+
+
+    </div>
+  </div>
+</section>

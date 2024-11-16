@@ -1,0 +1,101 @@
+<section class="dashboard pt_120 xs_pt_80">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-3 col-lg-4 wow fadeInLeft">
+        <div class="dashboard_sidebar">
+          <div class="dashboard_sidebar_user">
+            <div class="img">
+              <img src="assets/images/matchImages/Michael.png" alt="dashboard" class="img-fluid w-100">
+              <label for="profile_photo"><i class="far fa-camera"></i></label>
+              <input type="file" id="profile_photo" hidden>
+            </div>
+            <h3>Michael</h3>
+          </div>
+          <div class="dashboard_sidebar_menu">
+            <ul>
+              <li><a routerLink="/user/personelinfo"><i class="fas fa-user"></i> 會員資料</a></li>
+              <li><a routerLink="/act/userarea"><i class="fas fa-clipboard-list"></i> 活動紀錄</a>
+              </li>
+              <li><a class="active" routerLink="/orderlist"><i class="fas fa-shopping-basket"></i>
+                  訂單列表</a></li>
+              <li><a routerLink="/donaterecord"><i class="fas fa-star"></i> 捐款紀錄</a></li>
+              <li><a href="dashboard_wishlist.html"><i class="fas fa-heart"></i> 願望清單</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-9 col-lg-8 wow fadeInRight">
+        <div class="dashboard_content">
+          <h2 class="dashboard_title">訂單列表</h2>
+          <div class="dashboard_order">
+            <div class="table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th>訂單編號</th>
+                    <th>訂單日期</th>
+                    <th>總金額</th>
+                    <th>訂單狀態</th>
+                    <th>付款狀態</th>
+                    <th>配送狀態</th>
+                    <th>訂單明細</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let order of orders">
+                    <td>#{{ order.orderId }}</td>
+                    <td>{{ order.orderDate }}</td>
+                    <td>${{ order.totalPrice }}</td>
+                    <td>
+                      <span [ngClass]="{
+                          'complete': order.orderStatus === '已完成',
+                          'cancel': order.orderStatus === '待處理',
+                          'active': order.orderStatus === '處理中'
+                      }">
+                        {{ order.orderStatus }}
+                      </span>
+                    </td>
+                    <td>
+                      <span [ngClass]="getPaymentStatusClass(order.paymentStatus)">
+                        {{ order.paymentStatus === 'True' ? '已付款' : '未付款' }}
+                      </span>
+                    </td>
+                    <td>
+                      <span [ngClass]="getShippingStatusClass(order.shippingStatus)">
+                        {{ order.shippingStatus === 'True' ? '已配送' : '未配送' }}
+                      </span>
+                    </td>
+                    <td><a [routerLink]="['/orderdetail', order.orderId]">查看明細</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="pagination_area mt_35 xs_mb_60 wow fadeInUp">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+                <li class="page-item">
+                  <a class="page-link" aria-label="Previous" (click)="changePage(currentPage - 1)">
+                    <i class="far fa-arrow-left"></i>
+                  </a>
+                </li>
+
+                <li *ngFor="let page of [].constructor(totalPages); let i = index" class="page-item"
+                  [class.active]="currentPage === i + 1"
+                  [ngClass]="{'current-page': currentPage === i + 1}">
+                  <a class="page-link" (click)="changePage(i + 1)">{{ i + 1 }}</a>
+                </li>
+
+                <li class="page-item" [class.disabled]="currentPage === totalPages">
+                  <a class="page-link" aria-label="Next" (click)="changePage(currentPage + 1)">
+                    <i class="far fa-arrow-right"></i>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

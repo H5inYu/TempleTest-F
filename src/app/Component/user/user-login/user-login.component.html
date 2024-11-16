@@ -1,0 +1,74 @@
+  <!--==========================
+          SIGN IN START
+      ===========================-->
+      <section class="sign_in">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-6 wow fadeInLeft">
+                <div class="sign_in_img">
+                    <img src="assets/images/loginpicture.png" alt="sign in" class="img-fluid w-100">
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-10 col-lg-6 wow fadeInRight">
+                <div class="sign_in_form">
+                    <a class="sign_in_logo" href="index.html">
+                        <img src="assets/images/1-1.png" alt="sign in" class="img-fluid w-100">
+                    </a>
+                    <h2>歡迎來到廟不可言</h2>
+                    <p class="description">登入您的帳戶，使用本網站提供的服務</p>
+                  <form action="#">
+                        <div class="row">
+                            <div class="col-md-6">
+                              <input type="text" [(ngModel)]="email" placeholder="請輸入您的信箱" name="email" class="form-control">
+                              <div *ngIf="emailError" class="error-message">
+                                <p>{{ emailError }}</p>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <input type="password" [(ngModel)]="password" placeholder="請輸入您的密碼" name="password" class="form-control">
+                              <div *ngIf="passwordError" class="error-message">
+                                <p>{{ passwordError }}</p>
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="sign_in_check_area">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            記住我
+                                        </label>
+                                    </div>
+                                    <a routerLink="/user/forgotpassword">忘記密碼?</a>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="common_btn" type="button" (click)="onLogin()">登入</button>
+                            </div>
+                        </div>
+                    </form>
+                    <p class="or">其他登入方式</p>
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <span>
+                                    <img src="assets/images/google_icon.svg" alt="google" class="img-fluid w-100">
+                                </span>
+                                Google
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span>
+                                    <img src="assets/images/LINEicon.png" alt="facebook" class="img-fluid w-100">
+                                </span>
+                                Line
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="dont_account">還沒有帳戶? <a routerLink="/user/signup">註冊</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--==========================
+        SIGN IN END
+    ===========================-->

@@ -1,0 +1,37 @@
+<section class="dashboard pt_120 xs_pt_80">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-3 col-lg-4 wow fadeInLeft">
+        <div class="dashboard_sidebar">
+          <div class="dashboard_sidebar_user">
+            <div class="img">
+              <!-- <img src="assets/images/Jarek.jpg" alt="dashboard" class="img-fluid w-100"> -->
+              <label for="profile_photo"><i class="far fa-camera"></i></label>
+              <input type="file" id="profile_photo" hidden>
+            </div>
+            <h3>侯好帥</h3>
+            <p></p>
+          </div>
+          <div class="dashboard_sidebar_menu">
+            <ul>
+              <li><a routerLink="/user/personelinfo"><i class="fas fa-user"></i> 會員資料</a></li>
+              <li><a class="active" routerLink="/act/userarea"><i class="fas fa-clipboard-list"></i> 活動紀錄</a>
+              </li>
+              <li><a routerLink="/orderlist"><i class="fas fa-shopping-basket"></i>
+                  訂單列表</a></li>
+              <li><a routerLink="/donaterecord"><i class="fas fa-star"></i> 捐款紀錄</a></li>
+              <li><a href="dashboard_wishlist.html"><i class="fas fa-heart"></i> 願望清單</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-9 col-lg-8 wow fadeInRight">
+        <div class="dashboard_content">
+
+          <app-act-regrecord></app-act-regrecord>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

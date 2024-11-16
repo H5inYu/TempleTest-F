@@ -1,0 +1,112 @@
+<!--==========================
+        BREADCRUMB AREA START
+===========================-->
+<section class="breadcrumb_area" style="background: url(assets/images/matchImages/matchEditBG.jpg);">
+  <div class="container">
+    <div class="row wow fadeInUp">
+      <div class="col-12">
+        <div class="breadcrumb_text">
+          <h1>{{ userProfile.userId ? '資料修改' : '資料新增' }}</h1>
+          <ul>
+            <li><a href="/matchIndex">配對首頁 </a></li>
+            <li><a href="/match-edit">偏好資料維護</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--==========================
+          BREADCRUMB AREA END
+===========================-->
+<!--============================
+          DASHBOARD INFO EDIT START
+=============================-->
+<section class="dashboard pt_120 xs_pt_80">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-3 col-lg-4 wow fadeInLeft">
+        <div>
+          <div class="dashboard_sidebar_user">
+            <div class="img">
+              <img *ngIf="userPhotoPath != ''" [src]="userProfile.photoPath" alt="會員照片" class="img-fluid w-100">
+              <img *ngIf="userPhotoPath == ''" src="assets/images/matchImages/預設.jpg" alt="default photo" class="img-fluid w-100">
+              <!-- <ng-template #placeholder *ngIf="userPhotoPath == ''">
+                <img src="assets/images/matchImages/user.jpg" alt="default photo" class="img-fluid w-100">
+              </ng-template> -->
+              <label for="profile_photo"><i class="far fa-camera"></i></label>
+              <input type="file" id="profile_photo" (change)="onPhotoSelected($event)" hidden>
+            </div>
+            <h3>{{ userProfile.userNickName ? userProfile.userNickName : 'Alice' }}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-9 col-lg-8 wow fadeInRight">
+        <div class="dashboard_content">
+          <div>
+            <div class="dashboard_profile_info_edit">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="mb-0">{{ action === 'edit' ? '資料修改/新增' : '資料新增/修改' }}</h2>
+                <button class="common_btn" (click)="navigateToMatch()" type="button">取消編輯</button>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="height" class="form-label">身高</label>
+                  <input type="number" class="form-control" id="height" [(ngModel)]="userProfile.height" name="height"
+                    placeholder="cm" required min="100" max="200">
+                  <div class="error" *ngIf="heightError">{{ heightError }}</div>
+                </div>
+              </div>
+              <div class="my-3"></div> <!-- my-3 用於增加垂直間距 -->
+              <div class="row">
+                <div class="details_extra_item col-md-6">
+                  <h5>特質選擇 <span>(可複選)</span></h5>
+                  <div *ngFor="let trait of traits" class="form-check" style="display: flex; align-items: center;">
+                    <input class="form-check-input" type="checkbox" [value]="trait" [id]="trait"
+                      (change)="toggleTrait(trait)" [checked]="userProfile.selectedTraits?.includes(trait)">
+                    <label class="form-check-label" [for]="trait" style="margin-left: 8px;">{{ trait }}</label>
+                  </div>
+                </div>
+                <div class="details_extra_item col-md-6">
+                  <h5>興趣選擇 <span>(可複選)</span></h5>
+                  <div *ngFor="let hobby of hobbies" class="form-check" style="display: flex; align-items: center;">
+                    <input class="form-check-input" type="checkbox" [value]="hobby" [id]="hobby"
+                      (change)="toggleHobby(hobby)" [checked]="userProfile.selectedHobbies?.includes(hobby)">
+                    <label class="form-check-label" [for]="hobby" style="margin-left: 8px;">{{ hobby }}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <label for="intro" class="form-label">自我介紹</label>
+                  <textarea [(ngModel)]="userProfile.info" id="intro" rows="6" placeholder="請輸入100字以內自我介紹 ^_^"
+                    maxlength="100" class="form-control"></textarea>
+                  <div class="error" *ngIf="introError">{{ introError }}</div>
+                  <div class="my-3"></div>
+                  <!-- <div class="form-check" style="display: flex; align-items: center;">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="userProfile.receiveNotifications"
+                      id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault" style="margin-left: 8px;">
+                      <h6 style="margin: 0;">我願意收到系統配對通知信</h6>
+                    </label>
+                  </div> -->
+                  <div class="my-3"></div> <!-- my-3 用於增加垂直間距 -->
+                  <!-- 顯示錯誤訊息的區域 -->
+                  <div *ngIf="errorMessage" class="error-message text-danger" style="font-size: 1.1em;">
+                    {{ errorMessage }}
+                  </div>
+                  <div class="my-3"></div>
+                  <!-- 儲存按鈕 -->
+                  <button class="common_btn" (click)="saveUserProfile()" type="button">儲存<span></span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--============================
+          DASHBOARD INFO EDIT END
+=============================-->

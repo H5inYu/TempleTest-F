@@ -1,0 +1,239 @@
+<!--==========================
+        BREADCRUMB AREA START
+    ===========================-->
+<section class="breadcrumb_area" style="background: url(assets/images/actImg/background1.png);">
+  <div class="container">
+    <div class="row wow fadeInUp">
+      <div class="col-12">
+        <div class="breadcrumb_text">
+          <h1>活動列表</h1>
+          <ul>
+            <li><a routerLink="/index">首頁 </a></li>
+            <li><a routerLink="/act/index">活動</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--==========================
+      BREADCRUMB AREA END
+  ===========================-->
+
+
+
+<!--==========================
+        MENU ITEM START
+    ===========================-->
+<section class="menu_item pt_125 xs_pt_85">
+  <div class="container">
+
+    <!-- <div id="schedule"> -->
+    <div class="colorful-tab-wrapper" id="filter_area" style="height: 1000px;">
+      <div class="row mb_15 wow fadeInUp">
+        <div class="col-xxl-8 col-lg-9 m-auto">
+          <ul class="filter_btn_area">
+            <li><a href="#item_1" (click)="selectActCategory(0)">顯示全部</a></li>
+            <li><a href="#item_2" (click)="selectActCategory(1)">祭典活動</a></li>
+            <li><a href="#item_3" (click)="selectActCategory(2)">慶典活動</a></li>
+            <li><a href="#item_4" (click)="selectActCategory(3)">社區活動</a></li>
+            <li><a href="#item_5" (click)="selectActCategory(4)">講座課程</a></li>
+          </ul>
+
+          <!-- 關鍵字搜尋 -->
+          <div class="sidebar_wizard sidebar_search" style="margin-top: 20px; padding: 10px !important;">
+            <form>
+              <input type="text" placeholder="Search here..." [(ngModel)]="actsearch.txtKeyword"
+                name="searchTxtKeyword" />
+              <button type="button" (click)="actInfoApi()"><i class="far fa-search"></i></button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="colorful-tab-content active" id='item_1'>
+            <div class="row" *ngIf="actsearch.FActCategoryId==0">
+              <div class="col-xl-3 col-sm-6 col-lg-4 wow fadeInUp" *ngFor="let item of actIndexList">
+                <div class="single_menu">
+                  <div class="single_menu_img">
+                    <img src="assets/images/actImg/act/{{item.fActImgName}}" alt="menu" class="img-fluid w-100">
+                    <ul>
+                      <li><a [routerLink]="['/act/detail', item.fActId]"><i class="far fa-eye"></i></a></li>
+                    </ul>
+                  </div>
+                  <div class="single_menu_text">
+                    <a class="category" [routerLink]="['/act/detail', item.fActId]">{{item.fActCategory}}</a>
+                    <a class="title" [routerLink]="['/act/detail', item.fActId]">{{item.fActName | actindexContentPipe
+                      }}</a>
+                    <p class="descrption">{{item.fActLocation}}</p>
+                    <div class="d-flex flex-wrap align-items-center">
+                      <a class="add_to_cart" [routerLink]="['/act/detail', item.fActId]" data-bs-toggle="modal"
+                        data-bs-target="#cartModal">詳細內容</a>
+                      <ng-container *ngIf="item.fRegFee; else elseTemplate">
+                        <h3> NT${{item.fRegFee|forMoneyPipe}}元 </h3>
+                      </ng-container>
+                      <ng-template #elseTemplate>
+                        <h3> {{item.fRegFee|forMoneyPipe}} </h3>
+                      </ng-template>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="colorful-tab-content " id='item_2'>
+            <div class="row" *ngIf="actsearch.FActCategoryId==1">
+              <div class="col-xl-3 col-sm-6 col-lg-4 wow fadeInUp" *ngFor="let item of actIndexList">
+                <div class="single_menu">
+                  <div class="single_menu_img">
+                    <img src="assets/images/actImg/act/{{item.fActImgName}}" alt="menu" class="img-fluid w-100">
+                    <ul>
+                      <li><a [routerLink]="['/act/detail', item.fActId]"><i class="far fa-eye"></i></a></li>
+                    </ul>
+                  </div>
+                  <div class="single_menu_text">
+                    <a class="category" [routerLink]="['/act/detail', item.fActId]">{{item.fActCategory}}</a>
+                    <a class="title" [routerLink]="['/act/detail', item.fActId]">{{item.fActName | actindexContentPipe
+                      }}</a>
+                    <p class="descrption">{{item.fActLocation}}</p>
+                    <div class="d-flex flex-wrap align-items-center">
+                      <a class="add_to_cart" [routerLink]="['/act/detail', item.fActId]" data-bs-toggle="modal"
+                        data-bs-target="#cartModal">詳細內容</a>
+                      <ng-container *ngIf="item.fRegFee; else elseTemplate">
+                        <h3> NT${{item.fRegFee|forMoneyPipe}}元 </h3>
+                      </ng-container>
+                      <ng-template #elseTemplate>
+                        <h3> {{item.fRegFee|forMoneyPipe}} </h3>
+                      </ng-template>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="colorful-tab-content " id='item_3'>
+            <div class="row" *ngIf="actsearch.FActCategoryId==2">
+              <div class="col-xl-3 col-sm-6 col-lg-4 wow fadeInUp" *ngFor="let item of actIndexList">
+                <div class="single_menu">
+                  <div class="single_menu_img">
+                    <img src="assets/images/actImg/act/{{item.fActImgName}}" alt="menu" class="img-fluid w-100">
+                    <ul>
+                      <li><a [routerLink]="['/act/detail', item.fActId]"><i class="far fa-eye"></i></a></li>
+                    </ul>
+                  </div>
+                  <div class="single_menu_text">
+                    <a class="category" [routerLink]="['/act/detail', item.fActId]">{{item.fActCategory}}</a>
+                    <a class="title" [routerLink]="['/act/detail', item.fActId]">{{item.fActName | actindexContentPipe
+                      }}</a>
+                    <p class="descrption">{{item.fActLocation}}</p>
+                    <div class="d-flex flex-wrap align-items-center">
+                      <a class="add_to_cart" [routerLink]="['/act/detail', item.fActId]" data-bs-toggle="modal"
+                        data-bs-target="#cartModal">詳細內容</a>
+                      <ng-container *ngIf="item.fRegFee; else elseTemplate">
+                        <h3> NT${{item.fRegFee|forMoneyPipe}}元 </h3>
+                      </ng-container>
+                      <ng-template #elseTemplate>
+                        <h3> {{item.fRegFee|forMoneyPipe}} </h3>
+                      </ng-template>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="colorful-tab-content " id='item_4'>
+            <div class="row" *ngIf="actsearch.FActCategoryId==3">
+              <div class="col-xl-3 col-sm-6 col-lg-4 wow fadeInUp" *ngFor="let item of actIndexList">
+                <div class="single_menu">
+                  <div class="single_menu_img">
+                    <img src="assets/images/actImg/act/{{item.fActImgName}}" alt="menu" class="img-fluid w-100">
+                    <ul>
+                      <li><a [routerLink]="['/act/detail', item.fActId]"><i class="far fa-eye"></i></a></li>
+                    </ul>
+                  </div>
+                  <div class="single_menu_text">
+                    <a class="category" [routerLink]="['/act/detail', item.fActId]">{{item.fActCategory}}</a>
+                    <a class="title" [routerLink]="['/act/detail', item.fActId]">{{item.fActName | actindexContentPipe
+                      }}</a>
+                    <p class="descrption">{{item.fActLocation}}</p>
+                    <div class="d-flex flex-wrap align-items-center">
+                      <a class="add_to_cart" [routerLink]="['/act/detail', item.fActId]" data-bs-toggle="modal"
+                        data-bs-target="#cartModal">詳細內容</a>
+                      <ng-container *ngIf="item.fRegFee; else elseTemplate">
+                        <h3> NT${{item.fRegFee|forMoneyPipe}}元 </h3>
+                      </ng-container>
+                      <ng-template #elseTemplate>
+                        <h3> {{item.fRegFee|forMoneyPipe}} </h3>
+                      </ng-template>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="colorful-tab-content " id='item_5'>
+            <div class="row" *ngIf="actsearch.FActCategoryId==4">
+              <div class="col-xl-3 col-sm-6 col-lg-4 wow fadeInUp" *ngFor="let item of actIndexList">
+                <div class="single_menu">
+                  <div class="single_menu_img">
+                    <img src="assets/images/actImg/act/{{item.fActImgName}}" alt="menu" class="img-fluid w-100">
+                    <ul>
+                      <li><a [routerLink]="['/act/detail', item.fActId]"><i class="far fa-eye"></i></a></li>
+                    </ul>
+                  </div>
+                  <div class="single_menu_text">
+                    <a class="category" [routerLink]="['/act/detail', item.fActId]">{{item.fActCategory}}</a>
+                    <a class="title" [routerLink]="['/act/detail', item.fActId]">{{item.fActName | actindexContentPipe
+                      }}</a>
+                    <p class="descrption">{{item.fActLocation}}</p>
+                    <div class="d-flex flex-wrap align-items-center">
+                      <a class="add_to_cart" [routerLink]="['/act/detail', item.fActId]" data-bs-toggle="modal"
+                        data-bs-target="#cartModal">詳細內容</a>
+                      <ng-container *ngIf="item.fRegFee; else elseTemplate">
+                        <h3> NT${{item.fRegFee|forMoneyPipe}}元 </h3>
+                      </ng-container>
+                      <ng-template #elseTemplate>
+                        <h3> {{item.fRegFee|forMoneyPipe}} </h3>
+                      </ng-template>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- 換頁 -->
+    <div class="pagination_area mt_60 wow fadeInUp">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item">
+            <!-- <a class="page-link" href="#" aria-label="Previous" (click)="onPageChange(actsearch.targetPage-1)"> -->
+            <a class="page-link" type="button" (click)="onPageChange(actsearch.targetPage-1)">
+              <i class="far fa-arrow-left"></i>
+            </a>
+          </li>
+          <li class="page-item" href="#" *ngFor="let item of pagesArray; let i=index"><a class="page-link"
+              [class.active]="actsearch.targetPage==item" (click)="onPageChange(item)">{{item}}</a></li>
+          <li class="page-item">
+            <!-- <a class="page-link" href="#" aria-label="Next" (click)="onPageChange(actsearch.targetPage+1)"> -->
+            <a class="page-link" type="button" (click)="onPageChange(actsearch.targetPage+1)">
+              <i class="far fa-arrow-right"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+
+  </div>
+</section>

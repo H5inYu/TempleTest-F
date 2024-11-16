@@ -1,0 +1,16 @@
+.errmessage {
+  color: red;
+  min-height: 3.5rem;
+  padding-top: 10px;
+  font-size: 1.2rem;
+}
+
+
+.my_pt_0 {
+  padding-top: 0px !important;
+}
+
+/* li {
+  display: none; */
+/* 確保沒有影響顯示的樣式 */
+/* } */

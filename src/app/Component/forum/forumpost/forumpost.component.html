@@ -1,0 +1,172 @@
+<!--==========================
+    HEADER START
+===========================-->
+
+<!--==========================
+    BREADCRUMB AREA START
+===========================-->
+
+<section class="breadcrumb_area" style="background: url(/assets/images/Greater.jpg);">
+    <div class="container">
+        <div class="row wow fadeInUp">
+            <div class="col-12">
+                <div class="breadcrumb_text">
+                    <h1>商品分享</h1>
+                    <ul>
+                        <li><a href="/Forumstart">妙語禪心</a></li>
+                        <li><a href="/Forumproduct">商品分享</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--==========================
+    BREADCRUMB AREA END
+===========================-->
+
+<!--==========================
+    BLOG DETAILS START
+===========================-->
+<section class="blog_details mt_120 xs_mt_100">
+    <div class="container">
+        <div class="row">
+            <!-- 主內容區域 -->
+            <div class="col-lg-8 wow fadeInLeft">
+                <div class="blog_details_img">
+                    <img *ngIf="posts[0]?.ImageUrl; else defaultImage" [src]="posts[0].ImageUrl" alt="blog details" class="img-fluid w-100">
+                    <ng-template #defaultImage>
+                        <img src="/assets/images/default.jpg" alt="blog details" class="img-fluid w-100">
+                    </ng-template>
+                </div>
+                <div class="blog_details_header">
+                    <ul class="left_info">
+                        <li><span>{{ posts[0]?.tag }}</span></li>
+                        <li><i class="far fa-user-circle"></i> {{ posts[0]?.userId || 'Admin' }}</li>
+                        <li><i class="far fa-calendar-alt"></i> {{ posts[0]?.create | date: 'yyyy/MM/dd' }}</li>
+                    </ul>
+                    <ul class="right_info">
+                        <li><i class="far fa-comment"></i> {{ posts[0]?.commentCount || 0 }}</li>
+                        <li><i class="far fa-heart"></i> 20</li>
+                        <li><i class="far fa-share-alt"></i> 24</li>
+                    </ul>
+                </div>
+                <div class="blog_details_text">
+                    <h2>{{ posts[0]?.poTitle || '文章標題' }}</h2>
+                    <p>{{ posts[0]?.poContent || '這裡是文章內容的示範文本...' }}</p>
+                </div>
+                <div class="details_tags_share">
+                    <ul>
+                        <li><span>Tags:</span></li>
+                        <li><a (click)="navigateTo(posts[0]?.tag)">{{ posts[0]?.tag || '標籤' }}</a></li>
+                    </ul>
+                </div>
+
+                <!-- 評論區域 -->
+                <div class="blog_det_comment_area menu_det_review_area mt_80">
+                    <h2>({{ posts[0]?.commentCount || 0 }}) 回覆</h2>
+                    <div *ngFor="let comment of posts[0]?.comments" class="single_review">
+                        <div class="img">
+                            <img src="assets/images/client_img_1.png" alt="Reviewer" class="img-fluid w-100">
+                        </div>
+                        <div class="text">
+                            <h4>{{ comment.userName }} <span>{{ comment.created | date: 'yyyy/MM/dd' }}</span></h4>
+                            <p>{{ comment.content }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 留言區域 -->
+                <div class="input_comment_area review_input_area mt_80">
+                    <h2>加入話題!</h2>
+                    <span>快對這篇文章發表你的意見吧!</span>
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="review_input_box">
+                                    <input type="text" placeholder="Name">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="review_input_box">
+                                    <input type="email" placeholder="Your Email">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="review_input_box">
+                                    <input type="text" placeholder="Phone">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="review_input_box">
+                                    <input type="text" placeholder="Subject">
+                                </div>
+                            </div>
+                            <div class="col-xl-12">
+                                <div class="review_input_box">
+                                    <textarea rows="5" placeholder="Type your message"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="common_btn">新增回覆 <span></span></button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 側邊欄區域 -->
+            <div class="col-lg-4 col-md-8 wow fadeInRight">
+                <div class="blog_sidebar sticky_sidebar">
+                    <div class="sidebar_wizard sidebar_category mt_25">
+                        <h2>貼文標籤</h2>
+                        <ul>
+                            <li><a href="/Forumproduct/1">商品心得<span>(15)</span></a></li>
+                            <li><a href="/Forumproduct/2">購買建議 <span>(15)</span></a></li>
+                            <li><a href="/Forumproduct/3">促銷分享 <span>(15)</span></a></li>
+                            <li><a href="/Forumproduct/4">限時優惠 <span>(15)</span></a></li>
+                            <li><a href="/Forumproduct/5">隱藏版周邊 <span>(15)</span></a></li>
+                        </ul>
+                    </div>
+                    <!-- 隨機推薦貼文區域 -->
+                    <div class="sidebar_wizard sidebar_post mt_25" id="randomPostsContainer">
+                        <h2>其他貼文</h2>
+                        <div *ngFor="let post of randomPosts" class="single_review">
+                            <div class="img">
+                                <img *ngIf="post.ImageUrl; else defaultImage" [src]="post.ImageUrl" alt="Reviewer" class="img-fluid w-100">
+                                <ng-template #defaultImage>
+                                    <img src="/assets/images/default.jpg" alt="Reviewer" class="img-fluid w-100">
+                                </ng-template>
+                            </div>
+                            <div class="text">
+                                <h4><a href="#">{{ post.poTitle }}</a></h4>
+                                <span>{{ post.create | date: 'yyyy/MM/dd' }}</span>
+                                <p>作者: {{ post.userId }} | 回覆數: {{ post.commentCount }} | 瀏覽數: {{ post.clickCount }} | 標籤: {{ post.tag }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- BLOG DETAILS END -->
+
+<!--==========================
+    FOOTER START
+===========================-->
+
+<!--==========================
+    FOOTER END
+===========================-->
+
+<!--==========================
+    SCROLL BUTTON START
+===========================-->
+<div class="progress-wrap">
+    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+    </svg>
+</div>
+<!--==========================
+    SCROLL BUTTON END
+===========================-->
