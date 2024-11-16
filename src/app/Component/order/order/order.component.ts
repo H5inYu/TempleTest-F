@@ -95,6 +95,12 @@ export class OrderComponent implements OnInit {
         //   console.error('訂單提交失敗', error);
         //}
         console.log('訂單提交成功', response);
+        // 將訂單資料存入 localStorage  
+        // 後端要回傳至少底下這三個
+        localStorage.setItem('orderId', response.orderId.toString());
+        localStorage.setItem('amount', response.info.amount.toString());
+        localStorage.setItem('currency', response.info.currency);
+        
         // 提交訂單後清空購物車
         this.orderService.clearCart(this.userId).subscribe(
           () => {

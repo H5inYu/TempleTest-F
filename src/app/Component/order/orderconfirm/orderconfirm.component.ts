@@ -12,6 +12,8 @@ export class OrderconfirmComponent implements OnInit {
   private baseLoginPayUrl: string = 'https://localhost:7203/api/Linepay/';
   transactionId: string | null = null;
   orderId: string | null = null;
+  amount: number = 0;
+  currency: string = 'TWD';
   // paymentStatus: string = "交易狀態 : 交易已授權，等待確認";
 
   constructor(
@@ -24,14 +26,17 @@ export class OrderconfirmComponent implements OnInit {
     // 取出 query parameters 中的 transactionId 和 orderId
     this.transactionId = this.route.snapshot.queryParamMap.get('transactionId');
     this.orderId = this.route.snapshot.queryParamMap.get('orderId');
+    // 從 localStorage 中取出 amount 和 currency
+    this.amount = localStorage.getItem('amount') ? parseInt(localStorage.getItem('amount')!) : 0;
+    this.currency = localStorage.getItem('currency') || 'TWD';
     console.log('Transaction ID:', this.transactionId);
     console.log('Order ID:', this.orderId);
   }
 
   confirmPayment(): void {
     const payment = {
-      amount: 160,
-      currency: 'TWD'
+      amount: this.amount,
+      currency: this.currency,
     };
 
     // 發送確認交易請求
